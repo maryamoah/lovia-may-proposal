@@ -1,26 +1,5 @@
 'use client';
-
 import { motion } from 'framer-motion';
 import { story } from '@/data/story';
-
-export function WhyYouSection() {
-  return (
-    <section className="bg-espresso px-6 py-24 text-ivory sm:px-10 lg:py-32">
-      <div className="mx-auto max-w-6xl">
-        <div className="max-w-2xl">
-          <p className="eyebrow text-gold">Why you</p>
-          <h2 className="mt-4 font-serif text-[clamp(2.8rem,7vw,6rem)] leading-none">{story.whyYou.heading}</h2>
-          <p className="mt-7 text-lg leading-8 text-ivory/68">{story.whyYou.supporting}</p>
-        </div>
-        <div className="mt-14 grid grid-cols-1 gap-px border border-gold/30 bg-gold/30 sm:grid-cols-2 lg:grid-cols-3">
-          {story.whyYou.qualities.map((quality) => (
-            <motion.article key={quality.title} whileHover={{ y: -4 }} className="bg-espresso p-7 transition md:min-h-44">
-              <h3 className="font-serif text-3xl">{quality.title}</h3>
-              <p className="mt-5 leading-7 text-ivory/62">{quality.text}</p>
-            </motion.article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+import { OptionalImage } from './OptionalImage';
+export function WhyYouSection(){return <section id="why-you" className="bg-espresso px-6 py-24 text-ivory sm:px-10 lg:py-32"><div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[.9fr_1.1fr] lg:items-center"><OptionalImage src={story.media.portrait} alt="Lovia portrait" className="aspect-[4/5] w-full max-w-md border border-gold/30" imageClassName="object-cover"/><div><p className="eyebrow text-gold">Why you</p><h2 className="mt-4 font-serif text-[clamp(2.8rem,7vw,5.7rem)] leading-none">{story.whyYou.heading}</h2><p className="mt-7 text-lg leading-8 text-ivory/68">{story.whyYou.supporting}</p><dl className="mt-10 space-y-6 border-l border-gold/30 pl-6">{story.whyYou.qualities.map((q)=><motion.div key={q.title} initial={{opacity:0,y:12}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.7}}><dt className="font-serif text-3xl text-ivory">{q.title}</dt><dd className="mt-2 leading-7 text-ivory/65">{q.text}</dd></motion.div>)}</dl></div></div><motion.p initial={{opacity:0,y:18}} whileInView={{opacity:1,y:0}} viewport={{once:true}} className="mx-auto mt-20 max-w-3xl text-center font-serif text-[clamp(2rem,5vw,4rem)] leading-tight text-gold">{story.whyYou.finalLine}</motion.p></section>}

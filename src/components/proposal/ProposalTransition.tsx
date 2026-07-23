@@ -1,0 +1,4 @@
+'use client';
+import { motion } from 'framer-motion';
+import { story } from '@/data/story';
+export function ProposalTransition(){return <section className="grid min-h-[70dvh] place-items-center bg-espresso px-6 py-24 text-center text-ivory"><div className="max-w-2xl space-y-6">{story.transitionToProposal.map((line,i)=><motion.p key={line} initial={{opacity:0,y:14}} whileInView={{opacity:1,y:0}} viewport={{once:true}} transition={{delay:i*.35}} className="font-serif text-2xl italic text-ivory/80 sm:text-4xl">{line}</motion.p>)}<motion.button initial={{opacity:0}} whileInView={{opacity:1}} transition={{delay:1.2}} onClick={()=>document.getElementById('proposal')?.scrollIntoView({behavior:'smooth'})} className="mt-8 rounded-full border border-gold/60 px-7 py-4 text-xs uppercase tracking-[.24em] text-gold">Ask me, May</motion.button></div></section>}

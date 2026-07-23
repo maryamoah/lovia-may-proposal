@@ -1,56 +1,6 @@
 'use client';
-
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import { story } from '@/data/story';
-
-export type MusicControlHandle = { toggle: () => void };
-
-type MusicControlProps = { start: boolean };
-
-export const MusicControl = forwardRef<MusicControlHandle, MusicControlProps>(function MusicControl({ start }, ref) {
-  const audio = useRef<HTMLAudioElement>(null);
-  const [available, setAvailable] = useState(true);
-  const [playing, setPlaying] = useState(false);
-
-  async function playWithFade() {
-    if (!audio.current || !available) return;
-    audio.current.volume = 0;
-    try {
-      await audio.current.play();
-      setPlaying(true);
-      let volume = 0;
-      const id = window.setInterval(() => {
-        volume = Math.min(0.5, volume + 0.04);
-        if (audio.current) audio.current.volume = volume;
-        if (volume >= 0.5) window.clearInterval(id);
-      }, 120);
-    } catch {
-      setAvailable(false);
-    }
-  }
-
-  function toggle() {
-    if (!audio.current || !available) return;
-    if (playing) {
-      audio.current.pause();
-      setPlaying(false);
-    } else {
-      void playWithFade();
-    }
-  }
-
-  useImperativeHandle(ref, () => ({ toggle }));
-
-  useEffect(() => {
-    if (start) void playWithFade();
-  }, [start]);
-
-  if (!available) return null;
-
-  return (
-    <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-50 rounded-full border border-gold/35 bg-espresso/80 px-4 py-3 text-xs uppercase tracking-[.18em] text-gold backdrop-blur">
-      <audio ref={audio} src={story.musicPath} loop preload="none" onError={() => setAvailable(false)} />
-      <button onClick={toggle} aria-label="Toggle music">Music {playing ? 'on' : 'off'}</button>
-    </div>
-  );
-});
+export type MusicControlHandle={toggle:()=>void;setSoft:(soft:boolean)=>void;swell:()=>void};
+type MusicControlProps={start:boolean};
+export const MusicControl=forwardRef<MusicControlHandle,MusicControlProps>(function MusicControl({start},ref){const audio=useRef<HTMLAudioElement>(null);const[available,setAvailable]=useState(true);const[playing,setPlaying]=useState(false);const[muted,setMuted]=useState(false);useEffect(()=>{setMuted(sessionStorage.getItem('sweet-lady-muted')==='true')},[]);function fadeTo(target:number){const el=audio.current;if(!el)return;const step=()=>{if(!audio.current)return;const diff=target-audio.current.volume;if(Math.abs(diff)<.02){audio.current.volume=target;return}audio.current.volume=Math.max(0,Math.min(.7,audio.current.volume+Math.sign(diff)*.03));window.setTimeout(step,80)};step()}async function play(){if(!audio.current||!available||muted)return;try{audio.current.volume=0;await audio.current.play();setPlaying(true);fadeTo(.45)}catch{setAvailable(false)}}function toggle(){if(!audio.current||!available)return;if(playing){audio.current.pause();setPlaying(false);setMuted(true);sessionStorage.setItem('sweet-lady-muted','true')}else{setMuted(false);sessionStorage.setItem('sweet-lady-muted','false');void play()}}useImperativeHandle(ref,()=>({toggle,setSoft:(soft)=>fadeTo(soft?.22:.45),swell:()=>fadeTo(.65)}));useEffect(()=>{if(start&&!muted)void play()},[start,muted]);if(!available)return null;return <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-3 z-50 rounded-full border border-gold/35 bg-espresso/85 px-3 py-2 text-[.65rem] uppercase tracking-[.16em] text-gold backdrop-blur sm:right-4"><audio ref={audio} src={story.media.music} loop preload="none" onError={()=>setAvailable(false)}/><button onClick={toggle} aria-label="Toggle Sweet Lady music" className="flex items-center gap-2"><span aria-hidden="true">{playing?'Ⅱ':'▶'}</span><span>Sweet Lady</span></button></div>});

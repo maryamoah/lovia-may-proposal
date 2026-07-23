@@ -1,26 +1,49 @@
 # May + Lovia Proposal Website
 
-A premium cinematic proposal website built with Next.js App Router, TypeScript, Tailwind CSS, and Framer Motion.
+A private, emotionally paced proposal website built with Next.js App Router, TypeScript, Tailwind CSS, and Framer Motion.
 
 ## Editing the story
-All names, dates, passwords, timeline chapters, image paths, proposal wording, and the letter live in `src/data/story.ts`.
 
-## Images
-Binary media files are intentionally **not** included in this pull request. After the pull request is merged, upload the real photos manually into `public/images` using these expected names:
+All names, dates, passwords, timeline chapters, media paths, proposal wording, progress labels, captions, small-things lines, transition copy, celebration copy, and the letter live in `src/data/story.ts`.
 
-- `photo1.jpg` through `photo9.jpg`
-- `first-instagram-message.jpg` for the first-message screenshot
+## Manual media uploads
 
-The app keeps `public/images/.gitkeep` so the folder exists in git. If a JPG is missing, the website automatically displays a text-based SVG placeholder from `public/placeholders`. Use compressed portrait-friendly images for best iPhone performance.
+Binary media files are intentionally **not** included in this task. Upload the real files manually and make sure every filename matches exactly.
 
-## Audio
-Binary audio is intentionally **not** included in this pull request. After the pull request is merged, upload your locally owned copy of the song manually at:
+### Images
+
+Upload images to these exact paths:
+
+```txt
+public/images/first-instagram-message.jpg
+public/images/first-meeting.jpg
+public/images/cape-coast.jpg
+public/images/lovia-portrait.jpg
+public/images/proposal.jpg
+public/images/celebration.jpg
+```
+
+The Instagram screenshot is the only image with a designed placeholder because it anchors the beginning of the story. All other images are optional and are omitted gracefully if missing, so the site should not show broken image icons or large empty spaces.
+
+### Audio
+
+Upload the song to this exact path:
 
 ```txt
 public/audio/sweet-lady.mp3
 ```
 
-The app keeps `public/audio/.gitkeep` so the folder exists in git. If the MP3 is missing or cannot be played, the music control remains disabled without showing an error. Music only starts after the password interaction to respect browser autoplay rules.
+The custom music control starts gently after the password gate is opened. If the file is missing or cannot be played, the control hides without exposing a browser audio player.
+
+### Optional video
+
+Upload the optional memory film to this exact path:
+
+```txt
+public/video/our-memory.mp4
+```
+
+The video is optional. If it is missing, the memory-film section disappears cleanly. When present, it is muted by default, uses inline playback, and uses `public/images/cape-coast.jpg` as its poster image when available.
 
 ## Run locally
 
@@ -34,8 +57,10 @@ Open `http://localhost:3000`.
 ## Build
 
 ```bash
+npm run lint
 npm run build
 ```
 
 ## Deploy to Vercel
-Import this repository in Vercel, keep the default Next.js settings, and deploy. Upload the real images and optional MP3 after merge/deployment according to your preferred private asset workflow.
+
+Import this repository in Vercel, keep the default Next.js settings, and deploy. When media files are committed to `main`, Vercel redeploys automatically and the site will use the exact filenames documented above.

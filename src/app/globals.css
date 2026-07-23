@@ -4,7 +4,6 @@
 
 @layer components {
   .chapter { position: relative; }
-  .chapter::before { content: ""; position: absolute; inset-inline: max(1.25rem, calc((100vw - 72rem) / 2)); top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(169,137,82,.38), transparent); }
   .btn-primary { border: 1px solid rgba(169,137,82,.72); padding: 0.95rem 1.35rem; font-size: .72rem; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--espresso); background: var(--gold); transition: background-color .25s ease, color .25s ease, border-color .25s ease, transform .25s ease; }
   .btn-primary:hover { transform: translateY(-1px); background: var(--ivory); border-color: var(--ivory); }
   .btn-secondary { border: 1px solid rgba(247,240,227,.32); padding: 0.95rem 1.35rem; font-size: .72rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: rgba(247,240,227,.78); transition: border-color .25s ease, color .25s ease, transform .25s ease; }

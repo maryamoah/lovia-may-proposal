@@ -1,22 +1,21 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { CapeCoastSection } from './proposal/CapeCoastSection';
-import { FeltAtHomeSection } from './proposal/FeltAtHomeSection';
-import { FirstMeetingSection } from './proposal/FirstMeetingSection';
-import { FunnyMomentSection } from './proposal/FunnyMomentSection';
 import { BeginningSection } from './proposal/BeginningSection';
 import { LoveLetter } from './proposal/LoveLetter';
+import { MemoryTimeline } from './proposal/MemoryTimeline';
+import { MobileProgress } from './proposal/MobileProgress';
 import { MusicControl, MusicControlHandle } from './proposal/MusicControl';
 import { OpeningScene } from './proposal/OpeningScene';
 import { PasswordGate } from './proposal/PasswordGate';
 import { FirstMessageSection } from './proposal/FirstMessageSection';
 import { EndingExperience } from './proposal/EndingExperience';
 import { ProposalTransition } from './proposal/ProposalTransition';
-import { SmallThingsInterlude } from './proposal/SmallThingsInterlude';
+import { SmallThings } from './proposal/SmallThings';
+import { StoryProgress } from './proposal/StoryProgress';
 import { WhyYouSection } from './proposal/WhyYouSection';
 
-type ExperienceStage = 'locked' | 'unlocking' | 'story';
+type ExperienceStage = 'locked' | 'unlocking' | 'opening' | 'story';
 
 export default function ProposalExperience() {
   const [stage, setStage] = useState<ExperienceStage>('locked');
@@ -28,35 +27,29 @@ export default function ProposalExperience() {
     return () => document.documentElement.classList.remove('is-locked');
   }, [storyIsActive]);
 
-  useEffect(() => {
-    if (stage !== 'unlocking') return;
-
-    const openingTimer = window.setTimeout(() => setStage('story'), 800);
-    return () => window.clearTimeout(openingTimer);
-  }, [stage]);
-
   if (stage === 'locked') {
     return <PasswordGate onUnlock={() => setStage('unlocking')} />;
   }
 
   if (stage === 'unlocking') {
-    return <PasswordGate unlocked />;
+    return <PasswordGate unlocked onOpen={() => setStage('opening')} />;
   }
 
+  if (stage === 'opening') {
+    return <OpeningScene standalone onComplete={() => setStage('story')} />;
+  }
 
   return (
     <>
       <MusicControl ref={musicRef} start={storyIsActive} />
-      <main className="relative overflow-x-clip bg-espresso text-ivory">
-        <OpeningScene />
+      <StoryProgress />
+      <MobileProgress />
+      <main className="bg-espresso text-ivory">
         <BeginningSection />
         <FirstMessageSection />
-        <FirstMeetingSection />
-        <FunnyMomentSection />
-        <CapeCoastSection />
-        <FeltAtHomeSection />
+        <MemoryTimeline />
         <WhyYouSection />
-        <SmallThingsInterlude />
+        <SmallThings />
         <LoveLetter onReadingChange={(reading) => musicRef.current?.setSoft(reading)} />
         <ProposalTransition />
         <EndingExperience musicRef={musicRef} />

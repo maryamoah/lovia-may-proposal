@@ -1,9 +1,12 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { CapeCoastSection } from './proposal/CapeCoastSection';
+import { FeltAtHomeSection } from './proposal/FeltAtHomeSection';
+import { FirstMeetingSection } from './proposal/FirstMeetingSection';
+import { FunnyMomentSection } from './proposal/FunnyMomentSection';
 import { BeginningSection } from './proposal/BeginningSection';
 import { LoveLetter } from './proposal/LoveLetter';
-import { MemoryTimeline } from './proposal/MemoryTimeline';
 import { MobileProgress } from './proposal/MobileProgress';
 import { MusicControl, MusicControlHandle } from './proposal/MusicControl';
 import { OpeningScene } from './proposal/OpeningScene';
@@ -11,11 +14,11 @@ import { PasswordGate } from './proposal/PasswordGate';
 import { FirstMessageSection } from './proposal/FirstMessageSection';
 import { EndingExperience } from './proposal/EndingExperience';
 import { ProposalTransition } from './proposal/ProposalTransition';
-import { SmallThings } from './proposal/SmallThings';
+import { SmallThingsInterlude } from './proposal/SmallThingsInterlude';
 import { StoryProgress } from './proposal/StoryProgress';
 import { WhyYouSection } from './proposal/WhyYouSection';
 
-type ExperienceStage = 'locked' | 'unlocking' | 'opening' | 'story';
+type ExperienceStage = 'locked' | 'unlocking' | 'story';
 
 export default function ProposalExperience() {
   const [stage, setStage] = useState<ExperienceStage>('locked');
@@ -30,7 +33,7 @@ export default function ProposalExperience() {
   useEffect(() => {
     if (stage !== 'unlocking') return;
 
-    const openingTimer = window.setTimeout(() => setStage('opening'), 800);
+    const openingTimer = window.setTimeout(() => setStage('story'), 800);
     return () => window.clearTimeout(openingTimer);
   }, [stage]);
 
@@ -42,21 +45,22 @@ export default function ProposalExperience() {
     return <PasswordGate unlocked />;
   }
 
-  if (stage === 'opening') {
-    return <OpeningScene standalone onComplete={() => setStage('story')} />;
-  }
 
   return (
     <>
       <MusicControl ref={musicRef} start={storyIsActive} />
       <StoryProgress />
       <MobileProgress />
-      <main className="bg-espresso text-ivory">
+      <main className="relative overflow-x-clip bg-espresso text-ivory">
+        <OpeningScene />
         <BeginningSection />
         <FirstMessageSection />
-        <MemoryTimeline />
+        <FirstMeetingSection />
+        <FunnyMomentSection />
+        <CapeCoastSection />
+        <FeltAtHomeSection />
         <WhyYouSection />
-        <SmallThings />
+        <SmallThingsInterlude />
         <LoveLetter onReadingChange={(reading) => musicRef.current?.setSoft(reading)} />
         <ProposalTransition />
         <EndingExperience musicRef={musicRef} />

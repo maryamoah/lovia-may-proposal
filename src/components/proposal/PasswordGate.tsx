@@ -34,8 +34,8 @@ export function PasswordGate({ onUnlock, unlocked = false }: PasswordGateProps) 
             <p className="eyebrow text-gold">MAY · LOVIA</p>
             <p className="mt-2 text-sm text-ivory/62">For Lovia only.</p>
             <h1 className="mx-auto mt-4 max-w-[12ch] font-serif text-[clamp(2.75rem,5vw,5rem)] leading-[.92] tracking-[-.04em]">A private memory, waiting for you.</h1>
-            <p className="mx-auto mt-6 max-w-[18rem] text-sm text-ivory/66">Enter the date that made this real.</p>
-            <label className="mt-5 block text-xs uppercase tracking-[.2em] text-gold/75" htmlFor="proposal-password">The day we finally met.</label>
+            <p id="password-helper" className="mx-auto mt-7 max-w-[18rem] text-sm text-ivory/66">Enter the date that made this real.</p>
+            <label className="mt-7 block font-sans text-[0.68rem] font-semibold uppercase tracking-[.28em] text-gold/80" htmlFor="proposal-password">The day we finally met</label>
             <input
               id="proposal-password"
               value={code}
@@ -47,11 +47,13 @@ export function PasswordGate({ onUnlock, unlocked = false }: PasswordGateProps) 
               inputMode="numeric"
               pattern="[0-9]*"
               maxLength={6}
-              className="mx-auto mt-2 block w-full max-w-[280px] rounded-none border-0 border-b border-gold/35 bg-transparent px-2 py-3 text-center text-xl tracking-[.34em] text-ivory outline-none transition placeholder:text-ivory/25 focus:border-gold focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+              placeholder="DDMMYY"
+              className="mx-auto mt-4 block h-16 w-full max-w-[300px] appearance-none rounded-none border-0 border-b border-gold/35 bg-transparent px-4 py-0 text-center font-sans text-[18px] leading-[4rem] tracking-[.18em] text-ivory shadow-[0_14px_34px_rgba(0,0,0,.16)] outline-none transition duration-300 placeholder:text-ivory/24 placeholder:transition-opacity placeholder:duration-300 focus:border-gold/85 focus:shadow-[0_16px_42px_rgba(0,0,0,.18),0_8px_28px_rgba(169,137,82,.16)] focus:placeholder:opacity-0 focus-visible:outline-0"
+              aria-describedby="password-helper password-error"
               aria-invalid={error}
             />
-            <p className="mt-3 min-h-6 text-sm text-blush" aria-live="polite">{error ? 'That is not our key. Try the date May met Lovia.' : ''}</p>
-            <button className="btn-primary mx-auto mt-3 block w-full max-w-[300px]">Open our story</button>
+            <p id="password-error" className="mt-5 min-h-6 text-sm text-blush" aria-live="polite">{error ? 'That is not our key. Try the date May met Lovia.' : ''}</p>
+            <button className="btn-primary mx-auto mt-6 block w-full max-w-[300px]">Open our story</button>
           </motion.form>
         ) : (
           <motion.div key="remembered" initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.8, ease: 'easeOut' }} className="relative max-w-sm text-center">

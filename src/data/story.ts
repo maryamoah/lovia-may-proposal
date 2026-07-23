@@ -8,79 +8,79 @@ export type StoryImageRole =
 
 export type StoryImageMap = Partial<Record<StoryImageRole, string>>;
 
-export type Memory = {
-  eyebrow: string;
-  title: string;
-  caption: string;
-  image?: StoryImageRole;
-};
-
-export type Quality = {
-  title: string;
-  text: string;
-};
+export type Memory = { eyebrow: string; title: string; caption: string; image?: StoryImageRole };
+export type Quality = { title: string; text: string };
 
 export const story = {
   names: { asker: 'May', beloved: 'Lovia', nickname: 'Mommie' },
   passwords: ['19062026', '190626', 'mommie'],
-  musicPath: '/audio/sweet-lady.mp3',
-  images: {
+  media: {
     firstMessageScreenshot: '/images/first-instagram-message.jpg',
     firstMeeting: '/images/first-meeting.jpg',
     capeCoast: '/images/cape-coast.jpg',
     portrait: '/images/lovia-portrait.jpg',
     proposal: '/images/proposal.jpg',
     celebration: '/images/celebration.jpg',
-  } satisfies StoryImageMap,
+    memoryVideo: '/video/our-memory.mp4',
+    music: '/audio/sweet-lady.mp3',
+  },
+  progressLabels: [
+    { label: 'Beginning', target: 'beginning' },
+    { label: 'Memories', target: 'memories' },
+    { label: 'Why You', target: 'why-you' },
+    { label: 'Letter', target: 'letter' },
+    { label: 'The Question', target: 'proposal' },
+  ],
   opening: {
     eyebrow: 'May · Lovia',
     heading: 'I have a question for you, Mommie…',
     supporting: 'But first, let me remind you how we got here.',
+    date: '14 April 2026 — where the conversation began.',
   },
   beginning: {
-    heading: 'From one message to something real.',
-    body:
-      'I texted you on Instagram on 14 April 2026 without knowing where it would lead. By the time we finally met on 19 June, the conversations already felt easy. You were shy but welcoming, and after our first kiss, I could not take my eyes off you.',
+    heading: 'The message I am still grateful I sent.',
+    annotation: 'I had no idea this would become us.',
+    floatingDate: '14 April 2026',
+    placeholder: 'Add first-instagram-message.jpg to preserve the beginning here.',
   },
   memories: [
-    {
-      eyebrow: '14 April 2026',
-      title: 'The first message',
-      caption: 'One small doorway into us, opened by a message I am still grateful I sent.',
-    },
-    {
-      eyebrow: '19 June 2026',
-      title: 'The day we finally met',
-      caption: 'A shy welcome, easy conversation, and the feeling that something real had arrived.',
-      image: 'firstMeeting',
-    },
-    {
-      eyebrow: 'Cape Coast',
-      title: 'Where I knew for certain',
-      caption:
-        'I loved how I felt with you through the journey, the waakye, the hotel and the quiet time together. That was when I knew I had found my person.',
-      image: 'capeCoast',
-    },
-    {
-      eyebrow: 'Côte d’Ivoire and the ordinary adventures',
-      title: 'Attiéké, road trips, movie dates, Tea Bar and Konongo',
-      caption:
-        'Two girls, zero French and one mission: attiéké. Somehow, we found food and another memory we still laugh about.',
-      image: 'portrait',
-    },
+    { eyebrow: '14 April 2026', title: 'The first message', caption: 'One message opened the door to conversations that soon became the best part of my days.' },
+    { eyebrow: '19 June 2026', title: 'The day we finally met', caption: 'You were shy but welcoming. I wanted you to feel comfortable, but somehow you were the one who made everything feel easy.', image: 'firstMeeting' },
+    { eyebrow: 'Cape Coast', title: 'Where I knew', caption: 'Somewhere between the journey, the waakye, the hotel and the quiet moments together, I realised I was no longer simply enjoying your company. I had found my person.', image: 'capeCoast' },
+    { eyebrow: 'Côte d’Ivoire and everything after', title: 'The adventures that became ours', caption: 'Two girls, zero French and one mission: attiéké. Then came Kumasi, Tea Bar, movie dates, Konongo and all the ordinary moments I now treasure.', image: 'capeCoast' },
   ] satisfies Memory[],
+  video: {
+    heading: 'One memory deserves to move.',
+    caption: 'I wish I could preserve every laugh exactly as it happened.',
+    label: 'May + Lovia · A moment worth keeping',
+  },
   whyYou: {
-    heading: 'She feels like home.',
-    supporting: 'You make me feel safe enough to be myself and inspired enough to become better.',
+    heading: 'Why you',
+    supporting: 'Not as a list of perfect things, but as the quiet reasons my heart recognises you.',
+    finalLine: 'You do not just feel like someone I love. You feel like home.',
     qualities: [
-      { title: 'Kind', text: 'The first thing people notice, and one of the things I love most.' },
-      { title: 'Beautiful', text: 'Inside and out. I still catch myself staring.' },
-      { title: 'She stays', text: 'You said you would be there through the difficult parts, and you were.' },
-      { title: 'Ambitious', text: 'Disciplined, driven and determined without losing your softness.' },
-      { title: 'Loving', text: 'You are honest and vocal about how you feel. You never leave me guessing.' },
-      { title: 'Safe', text: 'With you, I can be vulnerable, honest and fully myself.' },
+      { title: 'Kind', text: 'You care naturally. It is never forced.' },
+      { title: 'Beautiful', text: 'I still catch myself looking at you for longer than I should.' },
+      { title: 'She stays', text: 'You kept your word when staying would have been easier to avoid.' },
+      { title: 'Ambitious', text: 'You make me proud of who you are and excited for who you are becoming.' },
+      { title: 'Loving', text: 'You communicate your love clearly. I never have to guess.' },
+      { title: 'Safe', text: 'With you, I can be honest, vulnerable, playful and fully myself.' },
     ] satisfies Quality[],
   },
+  smallThings: {
+    heading: 'The small things I want to keep.',
+    lines: [
+      'The way you talk to me when something is wrong.',
+      'The way you remain soft without being weak.',
+      'The way you make ordinary plans feel exciting.',
+      'Your puffy morning eyes.',
+      'Our long conversations.',
+      'The comfort of knowing I can tell you everything.',
+    ],
+  },
+  letterIntro: ['There are things I can say casually…', 'And things I need you to read slowly.'],
+  letterDate: 'For Lovia, in 2026.',
+  letterPostscript: 'P.S. I still plan to disturb you with my long conversations.',
   letter: `My Mommie,
 
 I have never felt this much peace in love before. Loving you has been one of the calmest and most reassuring feelings I have ever experienced. Being in your arms feels safe, and your love never leaves me questioning your intentions with me.
@@ -95,14 +95,15 @@ Even on difficult days, I hope we choose each other, love each other, and still 
 
 Always yours,
 May`,
+  transitionToProposal: ['I have told you how we began.', 'I have told you what I see in you.', 'There is only one thing left to ask.'],
   proposal: {
     eyebrow: 'The question',
-    heading: 'I cannot imagine a better love story than ours.',
-    question: 'Will you walk this journey of discovery with me, Mommie—and officially be my girlfriend?',
-    softResponses: ['Nice try, Mommie.', 'You already know my favourite answer.'],
+    lines: ['Lovia…', 'I cannot imagine a better love story than ours.', 'Will you walk this journey of discovery with me, Mommie…', '…and officially be my girlfriend?'],
+    softResponses: ['Take your time. I am still here.', 'Okay, one more chance.'],
   },
   yes: {
-    heading: 'She said yes.',
-    lines: ['Officially my girlfriend.', 'May + Lovia', 'Forever starts with choosing each other today.'],
+    sequence: ['She said yes.', 'Officially my girlfriend.', 'May + Lovia'],
+    dateLines: ['14 April began the conversation.', '19 June made it real.', 'Today, we chose us.'],
+    finalLine: 'Forever starts with choosing each other today.',
   },
 };

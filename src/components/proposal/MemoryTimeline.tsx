@@ -6,7 +6,7 @@ import { OptionalImage } from './OptionalImage';
 
 export function MemoryTimeline() {
   return (
-    <section className="bg-cream px-6 pb-28 text-espresso sm:px-10">
+    <section id="memories" className="bg-cream px-6 pb-28 text-espresso sm:px-10">
       <div className="mx-auto max-w-5xl">
         <div className="mb-14 flex items-end justify-between gap-8 border-t border-gold/30 pt-10">
           <div>
@@ -30,7 +30,7 @@ export function MemoryTimeline() {
                 <p className="mt-4 leading-7 text-espresso/68">{memory.caption}</p>
               </div>
               {memory.image ? (
-                <OptionalImage src={story.images[memory.image]} alt={memory.title} className="aspect-[4/5] max-w-xs border border-gold/25 md:mx-10" />
+                <OptionalImage src={story.media[memory.image]} alt={memory.title} className="aspect-[4/5] max-w-xs border border-gold/25 md:mx-10" />
               ) : null}
             </motion.article>
           ))}

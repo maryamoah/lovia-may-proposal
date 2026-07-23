@@ -17,7 +17,7 @@ export function MemoryTimeline() {
 
   return (
     <section id="memories" className="text-espresso">
-      <section ref={stickyRef} className="relative min-h-[145dvh] bg-espresso text-ivory">
+      <section ref={stickyRef} data-navigation-theme="dark" className="relative min-h-[145dvh] bg-espresso text-ivory">
         <div className="sticky top-0 grid min-h-dvh overflow-hidden lg:grid-cols-[1.15fr_.85fr]">
           <motion.div style={{ scale: imageScale, y: imageY }} className="relative min-h-[55dvh] lg:min-h-dvh">
             <OptionalImage src={story.media.firstMeeting} alt={firstMeeting.title} className="absolute inset-0" sizes="(min-width: 1024px) 58vw, 100vw" />
@@ -39,7 +39,7 @@ export function MemoryTimeline() {
         </div>
       </section>
 
-      <section className="bg-ivory px-5 py-16 sm:px-10 lg:py-24">
+      <section data-navigation-theme="light" className="bg-ivory px-5 py-16 sm:px-10 lg:py-24">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[.78fr_1.22fr] lg:items-end">
           <div>
             <p className="eyebrow text-gold">A funny little chapter</p>
@@ -53,7 +53,7 @@ export function MemoryTimeline() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-cream px-5 py-20 text-center sm:px-10 lg:py-28">
+      <section data-navigation-theme="dark" className="relative overflow-hidden bg-cream px-5 py-20 text-center sm:px-10 lg:py-28">
         <motion.div initial={{ scale: 1.08, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, amount: 0.35 }} transition={{ duration: 1.1 }} className="absolute inset-0">
           <OptionalImage src={story.media.capeCoast} alt={capeCoast.title} className="h-full w-full" sizes="100vw" />
           <div className="absolute inset-0 bg-[linear-gradient(rgba(27,18,14,.58),rgba(27,18,14,.62))]" />
@@ -71,7 +71,7 @@ export function MemoryTimeline() {
         </div>
       </section>
 
-      <section className="bg-ivory px-5 py-16 sm:px-10 lg:py-24">
+      <section data-navigation-theme="light" className="bg-ivory px-5 py-16 sm:px-10 lg:py-24">
         <div className="mx-auto max-w-6xl">
           <div className="mb-10 border-t border-gold/30 pt-9 md:flex md:items-end md:justify-between md:gap-8">
             <div>

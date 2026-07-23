@@ -2,13 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .chapter { position: relative; }
+  .chapter::before { content: ""; position: absolute; inset-inline: max(1.25rem, calc((100vw - 72rem) / 2)); top: 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(169,137,82,.38), transparent); }
+  .btn-primary { border: 1px solid rgba(169,137,82,.72); padding: 0.95rem 1.35rem; font-size: .72rem; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--espresso); background: var(--gold); transition: background-color .25s ease, color .25s ease, border-color .25s ease, transform .25s ease; }
+  .btn-primary:hover { transform: translateY(-1px); background: var(--ivory); border-color: var(--ivory); }
+  .btn-secondary { border: 1px solid rgba(247,240,227,.32); padding: 0.95rem 1.35rem; font-size: .72rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: rgba(247,240,227,.78); transition: border-color .25s ease, color .25s ease, transform .25s ease; }
+  .btn-secondary:hover { transform: translateY(-1px); border-color: rgba(169,137,82,.72); color: var(--gold); }
+}
+
 :root {
   --espresso: #1b120e;
   --ink: #050403;
   --ivory: #f7f0e3;
   --cream: #efe3cf;
-  --gold: #b9985b;
-  --rose: #7e1f1f;
+  --gold: #a98952;
+  --rose: #6f2420;
+  --blush: #b98278;
 }
 
 * { box-sizing: border-box; }
@@ -33,17 +43,17 @@ button:focus-visible, input:focus-visible { outline: 2px solid var(--gold); outl
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(185,152,91,.45) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(169,137,82,.45) 1px, transparent 1px);
   background-size: 62px 62px;
   opacity: .16;
   mask-image: radial-gradient(circle at center, black, transparent 68%);
 }
 .paper {
   background-color: var(--ivory);
-  background-image: linear-gradient(rgba(185,152,91,.055) 1px, transparent 1px), radial-gradient(circle at 20% 10%, rgba(255,255,255,.65), transparent 25%);
+  background-image: linear-gradient(rgba(169,137,82,.055) 1px, transparent 1px), radial-gradient(circle at 20% 10%, rgba(255,255,255,.65), transparent 25%);
   background-size: 100% 2rem, 100% 100%;
 }
-.light-leak { background: radial-gradient(circle at 18% 25%, rgba(185,152,91,.28), transparent 32%), radial-gradient(circle at 82% 18%, rgba(126,31,31,.22), transparent 30%); }
+.light-leak { background: radial-gradient(circle at 18% 25%, rgba(169,137,82,.28), transparent 32%), radial-gradient(circle at 82% 18%, rgba(126,31,31,.22), transparent 30%); }
 
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }

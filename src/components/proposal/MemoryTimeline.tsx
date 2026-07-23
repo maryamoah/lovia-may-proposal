@@ -56,8 +56,8 @@ export function MemoryTimeline() {
 
       <section data-navigation-theme="dark" className="relative overflow-hidden bg-espresso px-5 py-20 text-ivory sm:px-10 lg:py-28">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.2fr_.8fr] lg:items-stretch">
-          <motion.div initial={{ scale: 1.03, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, amount: 0.3 }} transition={{ ...baseTransition, duration: 0.55 }} className="relative min-h-[58vh] overflow-hidden rounded-sm border border-gold/25 bg-black lg:min-h-[74vh]">
-            <OptionalImage src={story.media.capeCoast} alt="Cape Coast memory" className="absolute inset-0" imageClassName="object-cover" sizes="(min-width: 1024px) 65vw, 100vw" objectPosition={story.capeCoast.objectPosition} />
+          <motion.div initial={{ scale: 1.03, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, amount: 0.3 }} transition={{ ...baseTransition, duration: 0.55 }} className="relative min-h-[58vh] overflow-hidden rounded-sm border border-gold/25 bg-espresso/25 lg:min-h-[74vh]">
+            <OptionalImage src={story.media.capeCoast} alt="Cape Coast memory" className="absolute inset-0 h-full w-full" imageClassName="object-cover" sizes="(min-width: 1024px) 65vw, 100vw" objectPosition={story.capeCoast.objectPosition} />
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.45 }} transition={baseTransition} className="relative grid content-center bg-espresso/82 p-2 lg:-ml-16 lg:p-10">
             <p className="eyebrow text-gold">{story.capeCoast.eyebrow}</p>

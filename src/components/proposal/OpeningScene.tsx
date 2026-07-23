@@ -3,14 +3,19 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { story } from '@/data/story';
 
-export function OpeningScene() {
+type OpeningSceneProps = {
+  onComplete?: () => void;
+  standalone?: boolean;
+};
+
+export function OpeningScene({ onComplete, standalone = false }: OpeningSceneProps) {
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 0.18], [0, 90]);
   const scale = useTransform(scrollYProgress, [0, 0.18], [1, 1.08]);
   const openingLines = [story.opening.heading, story.opening.supporting];
 
   return (
-    <section id="beginning" className="relative grid min-h-dvh place-items-center overflow-hidden bg-espresso px-5 py-20 text-center text-ivory sm:px-6 sm:py-24">
+    <section id={standalone ? undefined : 'opening'} className="relative grid min-h-dvh place-items-center overflow-hidden bg-espresso px-5 py-20 text-center text-ivory sm:px-6 sm:py-24">
       <motion.div style={{ y, scale }} className="absolute inset-0 bg-[radial-gradient(circle_at_72%_24%,rgba(185,152,91,.22),transparent_30%),radial-gradient(circle_at_20%_75%,rgba(111,36,32,.22),transparent_32%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(rgba(5,4,3,.18),rgba(27,18,14,.75))]" />
       <div className="particles" aria-hidden="true" />
@@ -31,8 +36,19 @@ export function OpeningScene() {
           ))}
         </div>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 2.1 }} className="mt-6 text-xs uppercase tracking-[.24em] text-gold/75">{story.opening.date}</motion.p>
+        {standalone ? (
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2.45, duration: 0.55 }}
+            onClick={onComplete}
+            className="btn-primary mt-10"
+          >
+            Begin our story
+          </motion.button>
+        ) : null}
       </motion.div>
-      <span className="absolute bottom-[max(1.5rem,env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 text-[.62rem] uppercase tracking-[.34em] text-ivory/45">Scroll</span>
+      {standalone ? null : <span className="absolute bottom-[max(1.5rem,env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 text-[.62rem] uppercase tracking-[.34em] text-ivory/45">Scroll</span>}
     </section>
   );
 }

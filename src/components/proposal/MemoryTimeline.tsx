@@ -1,16 +1,12 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
 import { useRef } from 'react';
 import { story } from '@/data/story';
-import { MemoryFilm } from './MemoryFilm';
+import { OptionalImage } from './OptionalImage';
 import { baseTransition } from './motion';
 
 export function MemoryTimeline() {
-  const firstMeeting = story.memories[1];
-  const capeCoast = story.memories[2];
-  const attieke = story.memories[3];
   const stickyRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: stickyRef, offset: ['start end', 'end start'] });
   const lightScale = useTransform(scrollYProgress, [0, 1], [0.92, 1.08]);
@@ -27,72 +23,61 @@ export function MemoryTimeline() {
           </motion.div>
           <div className="relative grid place-items-center px-6 py-16 lg:min-h-dvh lg:px-12">
             <div className="max-w-xl">
-              <p className="eyebrow text-gold">{firstMeeting.eyebrow}</p>
-              <h2 className="mt-5 font-serif text-[clamp(2.4rem,7vw,5.8rem)] leading-[.95] tracking-[-.035em]">{firstMeeting.title}</h2>
+              <p className="eyebrow text-gold">{story.firstMeeting.eyebrow}</p>
+              <h2 className="mt-5 font-serif text-[clamp(2.4rem,7vw,5.8rem)] leading-[.95] tracking-[-.035em]">{story.firstMeeting.heading}</h2>
+              <p className="story-copy mt-7 text-lg italic leading-8 text-ivory/78 sm:text-xl">{story.firstMeeting.intro}</p>
               <div className="mt-8 space-y-5">
-                {firstMeeting.caption.split('. ').map((line, index) => (
+                {story.firstMeeting.lines.map((line, index) => (
                   <motion.p key={line} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.7 }} transition={{ ...baseTransition, delay: index * 0.08 }} className="story-copy text-lg leading-8 text-ivory/72 sm:text-xl">
-                    {line.replace(/\.$/, '')}.
+                    {line}
                   </motion.p>
                 ))}
               </div>
+              <p className="mt-9 border-l border-gold/50 pl-5 font-serif text-2xl italic leading-tight text-gold sm:text-3xl">{story.firstMeeting.closing}</p>
             </div>
           </div>
         </div>
       </section>
 
       <section data-navigation-theme="light" className="bg-ivory px-5 py-16 sm:px-10 lg:py-24">
-        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[.78fr_1.22fr] lg:items-end">
-          <div>
-            <p className="eyebrow text-gold">A funny little chapter</p>
-            <h2 className="mt-4 font-serif text-[clamp(2.2rem,5.4vw,4.8rem)] leading-[1.02] tracking-[-.035em]">Côte d’Ivoire, zero French, and one mission.</h2>
-          </div>
-          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }} className="relative border-y border-gold/35 py-8">
-            <p className="eyebrow text-gold">{attieke.eyebrow}</p>
-            <h3 className="mt-3 font-serif text-[clamp(1.9rem,4vw,3.35rem)] leading-tight">{attieke.title}</h3>
-            <p className="story-copy mt-5 max-w-2xl text-lg leading-8 text-espresso/68">{attieke.caption}</p>
+        <div className="mx-auto grid max-w-6xl gap-9 lg:grid-cols-[1.08fr_.92fr] lg:items-center">
+          <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.35 }} transition={baseTransition}>
+            <OptionalImage src={story.media.attiekeFunnyMoment} alt="May and Lovia sharing the attiéké funny moment" className="w-full rounded-sm border border-gold/30 bg-cream shadow-[0_28px_70px_rgba(27,18,14,.12)]" imageClassName="h-auto w-full object-contain" sizes="(min-width: 1024px) 55vw, 100vw" width={1200} height={900} />
+          </motion.div>
+          <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.35 }} transition={baseTransition} className="lg:pl-6">
+            <p className="eyebrow text-gold">{story.attieke.eyebrow}</p>
+            <h2 className="mt-4 font-serif text-[clamp(2.2rem,5.4vw,4.8rem)] leading-[1.02] tracking-[-.035em]">{story.attieke.heading}</h2>
+            <h3 className="mt-6 font-serif text-[clamp(1.75rem,3.5vw,3rem)] leading-tight text-espresso/88">{story.attieke.supporting}</h3>
+            <p className="story-copy mt-5 max-w-2xl text-lg leading-8 text-espresso/68">{story.attieke.body}</p>
+            <p className="mt-7 inline-block border-y border-gold/35 py-3 font-serif text-2xl italic text-gold">{story.attieke.annotation}</p>
           </motion.div>
         </div>
       </section>
 
-      <section data-navigation-theme="dark" className="relative overflow-hidden bg-cream px-5 py-20 text-center sm:px-10 lg:py-28">
-        <motion.div initial={{ scale: 1.08, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, amount: 0.35 }} transition={{ ...baseTransition, duration: 0.55 }} className="absolute inset-0">
-          <Image src={story.media.capeCoast} alt={capeCoast.title} fill sizes="100vw" className="object-cover" />
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(27,18,14,.58),rgba(27,18,14,.62))]" />
-        </motion.div>
-        <div className="relative mx-auto max-w-4xl py-10 text-ivory">
-          <p className="eyebrow text-gold">{capeCoast.eyebrow}</p>
-          <h2 className="mt-5 font-serif text-[clamp(2.5rem,8vw,6.4rem)] leading-[.96] tracking-[-.035em]">{capeCoast.title}</h2>
-          <div className="mx-auto mt-8 max-w-2xl space-y-4">
-            {capeCoast.caption.split('. ').map((line, index) => (
-              <motion.p key={line} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.8 }} transition={{ ...baseTransition, delay: index * 0.08 }} className="story-copy text-lg leading-8 text-ivory/82 sm:text-xl">
-                {line.replace(/\.$/, '')}.
-              </motion.p>
-            ))}
-          </div>
+      <section data-navigation-theme="dark" className="relative overflow-hidden bg-espresso px-5 py-20 text-ivory sm:px-10 lg:py-28">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.2fr_.8fr] lg:items-stretch">
+          <motion.div initial={{ scale: 1.03, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, amount: 0.3 }} transition={{ ...baseTransition, duration: 0.55 }} className="relative min-h-[58vh] overflow-hidden rounded-sm border border-gold/25 bg-black lg:min-h-[74vh]">
+            <OptionalImage src={story.media.capeCoast} alt="Cape Coast memory" className="absolute inset-0" imageClassName="object-cover" sizes="(min-width: 1024px) 65vw, 100vw" objectPosition={story.capeCoast.objectPosition} />
+          </motion.div>
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.45 }} transition={baseTransition} className="relative grid content-center bg-espresso/82 p-2 lg:-ml-16 lg:p-10">
+            <p className="eyebrow text-gold">{story.capeCoast.eyebrow}</p>
+            <h2 className="mt-5 font-serif text-[clamp(2.5rem,8vw,6.4rem)] leading-[.96] tracking-[-.035em]">{story.capeCoast.heading}</h2>
+            <p className="story-copy mt-8 max-w-2xl text-lg leading-8 text-ivory/82 sm:text-xl">{story.capeCoast.body}</p>
+            <p className="mt-8 font-serif text-[clamp(2rem,4.5vw,4rem)] leading-tight text-gold">{story.capeCoast.closing}</p>
+          </motion.div>
         </div>
       </section>
 
-      <section data-navigation-theme="light" className="bg-ivory px-5 py-16 sm:px-10 lg:py-24">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-10 border-t border-gold/30 pt-9 md:flex md:items-end md:justify-between md:gap-8">
-            <div>
-              <p className="eyebrow text-gold">Selected memories</p>
-              <h2 className="mt-4 max-w-3xl font-serif text-[clamp(2.15rem,5.5vw,4.5rem)] leading-[1.02] tracking-[-.025em]">Only the moments we needed.</h2>
-            </div>
-            <p className="story-copy mt-5 max-w-sm text-sm leading-7 text-espresso/58 md:text-right">A concise rhythm of dates, journeys, ordinary plans, and the quiet certainty that this was becoming home.</p>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            {story.memories.slice(0, 1).map((memory) => (
-              <motion.article key={memory.title} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} className="border border-gold/25 bg-cream/55 p-6 shadow-[0_18px_50px_rgba(27,18,14,.06)]">
-                <p className="eyebrow text-gold">{memory.eyebrow}</p>
-                <h3 className="mt-3 font-serif text-[clamp(1.85rem,3.6vw,3rem)] leading-tight">{memory.title}</h3>
-                <p className="story-copy mt-4 max-w-md leading-7 text-espresso/68">{memory.caption}</p>
-              </motion.article>
-            ))}
+      <section data-navigation-theme="dark" className="bg-espresso px-5 pb-20 text-ivory sm:px-10 lg:pb-28">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.35fr_.65fr] lg:items-center">
+          <OptionalImage src={story.media.feltAtHome} alt="The moment May felt at home with Lovia" className="min-h-[56vh] overflow-hidden rounded-sm border border-gold/25 bg-black lg:min-h-[76vh]" imageClassName="object-cover" sizes="(min-width: 1024px) 70vw, 100vw" objectPosition={story.feltAtHome.objectPosition} />
+          <div className="lg:-ml-20 lg:bg-espresso/88 lg:p-10">
+            <p className="eyebrow text-gold">{story.feltAtHome.eyebrow}</p>
+            <h2 className="mt-4 font-serif text-[clamp(2.35rem,6vw,5rem)] leading-[1.02] tracking-[-.035em]">{story.feltAtHome.heading}</h2>
+            <p className="story-copy mt-6 text-lg leading-8 text-ivory/76 sm:text-xl">{story.feltAtHome.body}</p>
+            <p className="mt-8 font-serif text-[clamp(1.9rem,4vw,3.4rem)] leading-tight text-gold">{story.feltAtHome.closing}</p>
           </div>
         </div>
-        <MemoryFilm />
       </section>
     </section>
   );

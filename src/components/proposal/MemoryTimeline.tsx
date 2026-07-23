@@ -1,11 +1,11 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
+import Image from 'next/image';
 import { useRef } from 'react';
 import { story } from '@/data/story';
 import { MemoryFilm } from './MemoryFilm';
 import { baseTransition } from './motion';
-import { OptionalImage } from './OptionalImage';
 
 export function MemoryTimeline() {
   const firstMeeting = story.memories[1];
@@ -13,16 +13,17 @@ export function MemoryTimeline() {
   const attieke = story.memories[3];
   const stickyRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: stickyRef, offset: ['start end', 'end start'] });
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1.08, 1]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [-24, 24]);
+  const lightScale = useTransform(scrollYProgress, [0, 1], [0.92, 1.08]);
+  const lightY = useTransform(scrollYProgress, [0, 1], [-24, 24]);
 
   return (
     <section id="memories" className="text-espresso">
       <section ref={stickyRef} data-navigation-theme="dark" className="relative min-h-[145dvh] bg-espresso text-ivory">
         <div className="sticky top-0 grid min-h-dvh overflow-hidden lg:grid-cols-[1.15fr_.85fr]">
-          <motion.div style={{ scale: imageScale, y: imageY }} className="relative min-h-[55dvh] lg:min-h-dvh">
-            <OptionalImage src={story.media.firstMeeting} alt={firstMeeting.title} className="absolute inset-0" sizes="(min-width: 1024px) 58vw, 100vw" />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(27,18,14,.18),rgba(27,18,14,.72)),linear-gradient(0deg,rgba(27,18,14,.75),transparent_45%)]" />
+          <motion.div style={{ scale: lightScale, y: lightY }} className="relative min-h-[55dvh] overflow-hidden lg:min-h-dvh">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_42%_34%,rgba(255,255,255,.16),transparent_18%),radial-gradient(circle_at_56%_46%,rgba(169,137,82,.26),transparent_30%),linear-gradient(90deg,rgba(27,18,14,.18),rgba(27,18,14,.72)),linear-gradient(0deg,rgba(27,18,14,.75),transparent_45%)]" />
+            <motion.div aria-hidden="true" animate={{ opacity: [0.32, 0.72, 0.32], scale: [0.92, 1.04, 0.92] }} transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }} className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/20 blur-3xl" />
+            <div className="absolute inset-0 light-leak opacity-70" />
           </motion.div>
           <div className="relative grid place-items-center px-6 py-16 lg:min-h-dvh lg:px-12">
             <div className="max-w-xl">
@@ -56,7 +57,7 @@ export function MemoryTimeline() {
 
       <section data-navigation-theme="dark" className="relative overflow-hidden bg-cream px-5 py-20 text-center sm:px-10 lg:py-28">
         <motion.div initial={{ scale: 1.08, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, amount: 0.35 }} transition={{ ...baseTransition, duration: 0.55 }} className="absolute inset-0">
-          <OptionalImage src={story.media.capeCoast} alt={capeCoast.title} className="h-full w-full" sizes="100vw" />
+          <Image src={story.media.capeCoast} alt={capeCoast.title} fill sizes="100vw" className="object-cover" />
           <div className="absolute inset-0 bg-[linear-gradient(rgba(27,18,14,.58),rgba(27,18,14,.62))]" />
         </motion.div>
         <div className="relative mx-auto max-w-4xl py-10 text-ivory">

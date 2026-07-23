@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { useState } from 'react';
 import { story } from '@/data/story';
 import { revealUp, staggerContainer, viewportOnce } from './motion';
@@ -12,7 +11,6 @@ type ProposalSectionProps = {
 
 export function ProposalSection({ onYes }: ProposalSectionProps) {
   const [attempts, setAttempts] = useState(0);
-  const [bg, setBg] = useState(true);
   const [off, setOff] = useState({ x: 0, y: 0 });
   const response = attempts > 0 ? story.proposal.softResponses[(attempts - 1) % story.proposal.softResponses.length] : '';
 
@@ -32,8 +30,9 @@ export function ProposalSection({ onYes }: ProposalSectionProps) {
 
   return (
     <section id="proposal" data-navigation-theme="dark" className="relative grid min-h-dvh place-items-center overflow-hidden bg-espresso px-6 py-20 text-center text-ivory sm:py-24">
-      {bg ? <Image src={story.media.proposalImage} alt="" fill sizes="100vw" className="object-cover opacity-45" onError={() => setBg(false)} /> : null}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_30%,rgba(169,137,82,.18),transparent_28%),linear-gradient(rgba(27,18,14,.58),rgba(27,18,14,.88))]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_18%,rgba(255,255,255,.12),transparent_18%),radial-gradient(circle_at_68%_32%,rgba(169,137,82,.24),transparent_30%),radial-gradient(circle_at_26%_72%,rgba(80,0,0,.24),transparent_34%),linear-gradient(rgba(27,18,14,.2),rgba(27,18,14,.9))]" />
+      <motion.div aria-hidden="true" initial={{ opacity: 0.24, scale: 0.92 }} whileInView={{ opacity: 0.7, scale: 1 }} transition={{ duration: 2.4, ease: 'easeOut' }} className="absolute h-[32rem] w-[32rem] rounded-full border border-gold/15 bg-gold/5 blur-3xl" />
+      <div className="absolute inset-0 light-leak" />
       <div className="absolute inset-0 shadow-[inset_0_0_220px_rgba(0,0,0,.85)]" />
       <motion.div variants={staggerContainer} initial="hidden" whileInView="visible" viewport={viewportOnce} className="relative max-w-3xl">
         <motion.p variants={revealUp} className="eyebrow text-gold">{story.proposal.eyebrow}</motion.p>

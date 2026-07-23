@@ -6,7 +6,7 @@ import { InstagramScreenshot } from './InstagramScreenshot';
 
 export function FirstMessageSection() {
   return (
-    <section className="chapter bg-cream px-5 py-14 text-espresso sm:px-8 lg:py-[4.5rem]" aria-labelledby="first-message-title">
+    <section data-navigation-theme="light" className="chapter bg-cream px-5 py-14 text-espresso sm:px-8 lg:py-[4.5rem]" aria-labelledby="first-message-title">
       <div className="mx-auto grid max-w-6xl gap-9 lg:grid-cols-[1fr_.85fr] lg:items-center">
         <motion.div initial={{ opacity: 0, x: -18 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.35 }}>
           <p className="eyebrow text-gold">Preserved beginning</p>

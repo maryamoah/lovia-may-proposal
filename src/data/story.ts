@@ -1,3 +1,5 @@
+export type NavigationTheme = 'light' | 'dark';
+
 export type StoryImageRole =
   | 'firstMessageScreenshot'
   | 'firstMeeting'
@@ -7,6 +9,7 @@ export type StoryImageRole =
   | 'celebration';
 
 export type StoryImageMap = Partial<Record<StoryImageRole, string>>;
+export type ProgressLabel = { label: string; target: string; theme: NavigationTheme };
 
 export type Memory = { eyebrow: string; title: string; caption: string; image?: StoryImageRole };
 export type Quality = { title: string; text: string };
@@ -26,12 +29,12 @@ export const story = {
     music: '/audio/sweet-lady.mp3',
   },
   progressLabels: [
-    { label: 'Beginning', target: 'beginning' },
-    { label: 'Memories', target: 'memories' },
-    { label: 'Why You', target: 'why-you' },
-    { label: 'Letter', target: 'letter' },
-    { label: 'The Question', target: 'proposal' },
-  ],
+    { label: 'Beginning', target: 'beginning', theme: 'light' },
+    { label: 'Memories', target: 'memories', theme: 'dark' },
+    { label: 'Why You', target: 'why-you', theme: 'dark' },
+    { label: 'Letter', target: 'letter', theme: 'light' },
+    { label: 'The Question', target: 'proposal', theme: 'dark' },
+  ] satisfies ProgressLabel[],
   opening: {
     eyebrow: 'May · Lovia',
     heading: 'I have a question for you, Mommie…',

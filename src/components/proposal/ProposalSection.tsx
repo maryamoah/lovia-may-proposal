@@ -30,7 +30,7 @@ export function ProposalSection({ onYes }: ProposalSectionProps) {
   }
 
   return (
-    <section id="proposal" className="relative grid min-h-dvh place-items-center overflow-hidden bg-espresso px-6 py-24 text-center text-ivory">
+    <section id="proposal" data-navigation-theme="dark" className="relative grid min-h-dvh place-items-center overflow-hidden bg-espresso px-6 py-24 text-center text-ivory">
       {bg ? <Image src={story.media.proposalImage} alt="" fill sizes="100vw" className="object-cover opacity-45" onError={() => setBg(false)} /> : null}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_30%,rgba(169,137,82,.18),transparent_28%),linear-gradient(rgba(27,18,14,.58),rgba(27,18,14,.88))]" />
       <div className="absolute inset-0 shadow-[inset_0_0_220px_rgba(0,0,0,.85)]" />

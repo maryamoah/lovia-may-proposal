@@ -27,12 +27,19 @@ export default function ProposalExperience() {
     return () => document.documentElement.classList.remove('is-locked');
   }, [storyIsActive]);
 
+  useEffect(() => {
+    if (stage !== 'unlocking') return;
+
+    const openingTimer = window.setTimeout(() => setStage('opening'), 800);
+    return () => window.clearTimeout(openingTimer);
+  }, [stage]);
+
   if (stage === 'locked') {
     return <PasswordGate onUnlock={() => setStage('unlocking')} />;
   }
 
   if (stage === 'unlocking') {
-    return <PasswordGate unlocked onOpen={() => setStage('opening')} />;
+    return <PasswordGate unlocked />;
   }
 
   if (stage === 'opening') {

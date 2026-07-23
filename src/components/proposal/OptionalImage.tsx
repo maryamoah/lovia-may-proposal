@@ -13,9 +13,6 @@ type OptionalImageProps = {
   sizes?: string;
   fallback?: ReactNode;
   onAvailableChange?: (available: boolean) => void;
-  objectPosition?: string;
-  width?: number;
-  height?: number;
 };
 
 export function OptionalImage({
@@ -27,9 +24,6 @@ export function OptionalImage({
   sizes = '(min-width: 768px) 420px, 90vw',
   fallback = null,
   onAvailableChange,
-  objectPosition,
-  width,
-  height,
 }: OptionalImageProps) {
   const [failed, setFailed] = useState(!src);
 
@@ -37,47 +31,21 @@ export function OptionalImage({
     return fallback;
   }
 
-  const style = objectPosition ? { objectPosition } : undefined;
-  const handleLoad = () => onAvailableChange?.(true);
-  const handleError = () => {
-    setFailed(true);
-    onAvailableChange?.(false);
-  };
-
-  if (width && height) {
-    return (
-      <div className={`overflow-hidden ${className}`}>
-        <Image
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          priority={priority}
-          sizes={sizes}
-          className={imageClassName}
-          style={style}
-          onLoad={handleLoad}
-          onError={handleError}
-        />
-      </div>
-    );
-  }
-
   return (
-    <div className={`overflow-hidden ${className}`}>
-      <div className="relative h-full min-h-[inherit] w-full">
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          priority={priority}
-          sizes={sizes}
-          className={imageClassName}
-          style={style}
-          onLoad={handleLoad}
-          onError={handleError}
-        />
-      </div>
+    <div className={`relative overflow-hidden ${className}`}>
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        priority={priority}
+        sizes={sizes}
+        className={imageClassName}
+        onLoad={() => onAvailableChange?.(true)}
+        onError={() => {
+          setFailed(true);
+          onAvailableChange?.(false);
+        }}
+      />
     </div>
   );
 }

@@ -13,13 +13,13 @@ export const revealUp: Variants = {
 };
 
 export const revealLeft: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: baseTransition },
+  hidden: { opacity: 0, x: -16 },
+  visible: { opacity: 1, x: 0, transition: baseTransition },
 };
 
 export const revealRight: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: baseTransition },
+  hidden: { opacity: 0, x: 16 },
+  visible: { opacity: 1, x: 0, transition: baseTransition },
 };
 
 export const staggerContainer: Variants = {

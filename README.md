@@ -12,15 +12,18 @@ Binary media files are intentionally **not** included in this task. Upload the r
 
 ### Images
 
-Upload only the still images that are still part of the experience:
+Upload images to these exact paths:
 
 ```txt
 public/images/first-instagram-message.jpg
+public/images/first-meeting.jpg
 public/images/cape-coast.jpg
 public/images/lovia-portrait.jpg
+public/images/proposal.jpg
+public/images/celebration.jpg
 ```
 
-The First Meeting and Proposal sections are cinematic text-and-light experiences with no photograph. The Celebration sequence uses the memory video as its emotional payoff instead of a still image. The Instagram screenshot is the only image with a designed placeholder because it anchors the beginning of the story; other still images are omitted gracefully if missing.
+The Instagram screenshot is the only image with a designed placeholder because it anchors the beginning of the story. All other images are optional and are omitted gracefully if missing, so the site should not show broken image icons or large empty spaces.
 
 ### Audio
 
@@ -40,7 +43,7 @@ Upload the optional memory film to this exact path:
 public/video/our-memory.mp4
 ```
 
-The video powers the celebration payoff and the optional memory-film section. If it is missing or cannot play, the memory-film section disappears cleanly and the celebration overlay falls back to text. When present, it is muted by default and uses inline playback.
+The video is optional. If it is missing, the memory-film section disappears cleanly. When present, it is muted by default, uses inline playback, and uses `public/images/cape-coast.jpg` as its poster image when available.
 
 ## Run locally
 

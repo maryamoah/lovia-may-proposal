@@ -2,7 +2,9 @@ export type NavigationTheme = 'light' | 'dark';
 
 export type StoryImageRole =
   | 'firstMessageScreenshot'
+  | 'attiekeFunnyMoment'
   | 'capeCoast'
+  | 'feltAtHome'
   | 'portrait';
 
 export type StoryImageMap = Partial<Record<StoryImageRole, string>>;
@@ -16,10 +18,11 @@ export const story = {
   passwords: ['19062026', '190626', 'mommie'],
   media: {
     firstMessageScreenshot: '/images/first-instagram-message.jpg',
+    attiekeFunnyMoment: '/images/attieke-funny-moment.jpg',
     capeCoast: '/images/cape-coast.jpg',
+    feltAtHome: '/images/felt-at-home.jpg',
     portrait: '/images/lovia-portrait.jpg',
     celebrationVideo: '/video/our-memory.mp4',
-    memoryVideo: '/video/our-memory.mp4',
     music: '/audio/sweet-lady.mp3',
   },
   progressLabels: [
@@ -41,19 +44,42 @@ export const story = {
     floatingDate: '14 April 2026',
     placeholder: 'Add first-instagram-message.jpg to preserve the beginning here.',
   },
-  memories: [
-    { eyebrow: '14 April 2026', title: 'The first message', caption: 'One message opened the door to conversations that soon became the best part of my days.' },
-    { eyebrow: '19 June 2026', title: 'The day we finally met', caption: 'You were shy but welcoming. I wanted you to feel comfortable, but somehow you were the one who made everything feel easy.' },
-    { eyebrow: 'Cape Coast', title: 'Where I knew', caption: 'Somewhere between the journey, the waakye, the hotel and the quiet moments together, I realised I was no longer simply enjoying your company. I had found my person.', image: 'capeCoast' },
-    { eyebrow: 'Côte d’Ivoire and everything after', title: 'The adventures that became ours', caption: 'Two girls, zero French and one mission: attiéké. Then came Kumasi, Tea Bar, movie dates, Konongo and all the ordinary moments I now treasure.' },
-  ] satisfies Memory[],
-  video: {
-    heading: 'One memory deserves to move.',
-    caption: 'I wish I could preserve every laugh exactly as it happened.',
-    label: 'May + Lovia · A moment worth keeping',
+  firstMeeting: {
+    eyebrow: '19 June 2026',
+    heading: 'The night we finally met.',
+    intro: 'There was no time for pictures. We were too busy being present.',
+    lines: [
+      'You were shy, but welcoming.',
+      'I wanted you to feel comfortable.',
+      'Somehow, you were the one who made everything feel easy.',
+      'Then came our first kiss.',
+      'And after that, I could not take my eyes off you.',
+    ],
+    closing: 'We did not capture the night in a photograph, but I remember exactly how it felt.',
+  },
+  attieke: {
+    eyebrow: 'A FUNNY LITTLE CHAPTER',
+    heading: 'Côte d’Ivoire, zero French, and one mission.',
+    supporting: 'The adventures that became ours.',
+    body: 'Two girls, zero French and one mission: attiéké. Then came Kumasi, Tea Bar, movie dates, Konongo and all the ordinary moments I now treasure.',
+    annotation: 'Hunger gave us confidence.',
+  },
+  capeCoast: {
+    eyebrow: 'CAPE COAST',
+    heading: 'Where I knew.',
+    body: 'Somewhere between the journey, the waakye, the hotel and the quiet moments together, I realised I was no longer simply enjoying your company.',
+    closing: 'I had found my person.',
+    objectPosition: 'center center',
+  },
+  feltAtHome: {
+    eyebrow: 'THE MOMENT I KNEW',
+    heading: 'The moment I felt at home.',
+    body: 'It was not one grand gesture. It was the peace I felt beside you—the kind that made everything unfamiliar feel safe.',
+    closing: 'With you, I can simply be.',
+    objectPosition: 'center center',
   },
   whyYou: {
-    heading: 'Why you',
+    heading: 'Why you.',
     supporting: 'Not as a list of perfect things, but as the quiet reasons my heart recognises you.',
     finalLine: 'You do not just feel like someone I love. You feel like home.',
     qualities: [

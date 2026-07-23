@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export function BeginningSection() {
   return (
-    <section id="beginning" className="chapter bg-ivory px-5 py-12 text-espresso sm:px-8 lg:py-16" aria-labelledby="invitation-title">
+    <section id="beginning" data-navigation-theme="light" className="chapter bg-ivory px-5 py-12 text-espresso sm:px-8 lg:py-16" aria-labelledby="invitation-title">
       <motion.div initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.45 }} className="mx-auto grid max-w-5xl gap-8 md:grid-cols-[.75fr_1.25fr] md:items-end">
         <div className="hidden h-px bg-gold/45 md:block" />
         <div>

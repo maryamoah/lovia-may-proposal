@@ -4,6 +4,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import { story } from '@/data/story';
 import { MemoryFilm } from './MemoryFilm';
+import { baseTransition } from './motion';
 import { OptionalImage } from './OptionalImage';
 
 export function MemoryTimeline() {
@@ -29,7 +30,7 @@ export function MemoryTimeline() {
               <h2 className="mt-5 font-serif text-[clamp(2.4rem,7vw,5.8rem)] leading-[.95] tracking-[-.035em]">{firstMeeting.title}</h2>
               <div className="mt-8 space-y-5">
                 {firstMeeting.caption.split('. ').map((line, index) => (
-                  <motion.p key={line} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.7 }} transition={{ delay: index * 0.28 }} className="story-copy text-lg leading-8 text-ivory/72 sm:text-xl">
+                  <motion.p key={line} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.7 }} transition={{ ...baseTransition, delay: index * 0.08 }} className="story-copy text-lg leading-8 text-ivory/72 sm:text-xl">
                     {line.replace(/\.$/, '')}.
                   </motion.p>
                 ))}
@@ -54,7 +55,7 @@ export function MemoryTimeline() {
       </section>
 
       <section data-navigation-theme="dark" className="relative overflow-hidden bg-cream px-5 py-20 text-center sm:px-10 lg:py-28">
-        <motion.div initial={{ scale: 1.08, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, amount: 0.35 }} transition={{ duration: 1.1 }} className="absolute inset-0">
+        <motion.div initial={{ scale: 1.08, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, amount: 0.35 }} transition={{ ...baseTransition, duration: 0.55 }} className="absolute inset-0">
           <OptionalImage src={story.media.capeCoast} alt={capeCoast.title} className="h-full w-full" sizes="100vw" />
           <div className="absolute inset-0 bg-[linear-gradient(rgba(27,18,14,.58),rgba(27,18,14,.62))]" />
         </motion.div>
@@ -63,7 +64,7 @@ export function MemoryTimeline() {
           <h2 className="mt-5 font-serif text-[clamp(2.5rem,8vw,6.4rem)] leading-[.96] tracking-[-.035em]">{capeCoast.title}</h2>
           <div className="mx-auto mt-8 max-w-2xl space-y-4">
             {capeCoast.caption.split('. ').map((line, index) => (
-              <motion.p key={line} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.8 }} transition={{ delay: index * 0.32 }} className="story-copy text-lg leading-8 text-ivory/82 sm:text-xl">
+              <motion.p key={line} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.8 }} transition={{ ...baseTransition, delay: index * 0.08 }} className="story-copy text-lg leading-8 text-ivory/82 sm:text-xl">
                 {line.replace(/\.$/, '')}.
               </motion.p>
             ))}

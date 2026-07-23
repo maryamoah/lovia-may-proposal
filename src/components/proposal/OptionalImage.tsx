@@ -64,18 +64,20 @@ export function OptionalImage({
   }
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        priority={priority}
-        sizes={sizes}
-        className={imageClassName}
-        style={style}
-        onLoad={handleLoad}
-        onError={handleError}
-      />
+    <div className={`overflow-hidden ${className}`}>
+      <div className="relative h-full min-h-[inherit] w-full">
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          priority={priority}
+          sizes={sizes}
+          className={imageClassName}
+          style={style}
+          onLoad={handleLoad}
+          onError={handleError}
+        />
+      </div>
     </div>
   );
 }

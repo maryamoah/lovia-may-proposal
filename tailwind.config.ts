@@ -14,9 +14,10 @@ const config: Config = {
         blush: '#b98278',
       },
       fontFamily: {
-        serif: ['var(--font-serif)', 'Georgia', 'serif'],
-        body: ['var(--font-body)', 'Georgia', 'serif'],
-        sans: ['var(--font-sans)', 'Inter', 'ui-sans-serif', 'system-ui'],
+        serif: ['var(--font-display)', 'Georgia', 'serif'],
+        display: ['var(--font-display)', 'Georgia', 'serif'],
+        sans: ['var(--font-body)', 'Inter', 'ui-sans-serif', 'system-ui'],
+        body: ['var(--font-body)', 'Inter', 'ui-sans-serif', 'system-ui'],
       },
     },
   },

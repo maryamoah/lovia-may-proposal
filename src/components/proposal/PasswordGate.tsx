@@ -4,29 +4,32 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FormEvent, useState } from 'react';
 import { story } from '@/data/story';
 
-type PasswordGateProps = { onOpen: () => void };
+type PasswordGateProps = {
+  onUnlock?: () => void;
+  onOpen?: () => void;
+  unlocked?: boolean;
+};
 
-export function PasswordGate({ onOpen }: PasswordGateProps) {
+export function PasswordGate({ onUnlock, onOpen, unlocked = false }: PasswordGateProps) {
   const [code, setCode] = useState('');
   const [error, setError] = useState(false);
-  const [sealed, setSealed] = useState(false);
 
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (story.passwords.includes(code.trim().toLowerCase())) {
       setError(false);
-      setSealed(true);
+      onUnlock?.();
     } else {
       setError(true);
     }
   }
 
   return (
-    <motion.div exit={{ opacity: 0, transition: { duration: 0.8 } }} className="fixed inset-0 z-[70] grid min-h-dvh place-items-center overflow-hidden bg-espresso px-5 py-10 text-ivory grain">
+    <div className="grid min-h-dvh place-items-center overflow-hidden bg-espresso px-5 py-10 text-ivory grain">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(169,137,82,.14),transparent_34%)]" />
       <div className="absolute inset-x-8 top-8 h-px bg-gradient-to-r from-transparent via-gold/35 to-transparent" />
       <AnimatePresence mode="wait">
-        {!sealed ? (
+        {!unlocked ? (
           <motion.form key="password" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} onSubmit={submit} className="relative w-full max-w-sm text-center">
             <div className="wax-seal mx-auto mb-8 grid h-16 w-16 place-items-center rounded-full bg-rose text-center font-serif text-2xl text-ivory">M</div>
             <p className="eyebrow text-gold">For Lovia only.</p>
@@ -37,7 +40,7 @@ export function PasswordGate({ onOpen }: PasswordGateProps) {
             <button className="btn-primary mt-5 w-full">Unlock the letter</button>
           </motion.form>
         ) : (
-          <motion.div key="seal" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="relative text-center">
+          <motion.div key="seal" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="relative max-w-sm text-center">
             <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mb-8 font-serif text-3xl italic text-ivory/82">You remembered.</motion.p>
             <button onClick={onOpen} aria-label="Press the wax seal to begin our story" className="wax-seal mx-auto grid h-28 w-28 place-items-center rounded-full bg-rose font-serif text-5xl text-ivory transition hover:scale-[1.03]">M</button>
             <p className="mt-8 font-serif text-2xl text-ivory/86">Everything after this belongs to us.</p>
@@ -45,6 +48,6 @@ export function PasswordGate({ onOpen }: PasswordGateProps) {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   );
 }

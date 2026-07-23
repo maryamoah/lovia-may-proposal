@@ -15,10 +15,45 @@ import { SmallThings } from './proposal/SmallThings';
 import { StoryProgress } from './proposal/StoryProgress';
 import { WhyYouSection } from './proposal/WhyYouSection';
 
-export default function ProposalExperience() {
-  const [opened, setOpened] = useState(false);
-  const musicRef = useRef<MusicControlHandle>(null);
+type ExperienceStage = 'locked' | 'unlocking' | 'opening' | 'story';
 
-  useEffect(() => { document.documentElement.classList.toggle('is-locked', !opened); return () => document.documentElement.classList.remove('is-locked'); }, [opened]);
-  return <><MusicControl ref={musicRef} start={opened} /><StoryProgress hidden={!opened} />{opened ? <MobileProgress /> : null}{!opened ? <PasswordGate onOpen={() => setOpened(true)} /> : null}<main className="bg-espresso text-ivory"><OpeningScene /><BeginningSection /><FirstMessageSection /><MemoryTimeline /><WhyYouSection /><SmallThings /><LoveLetter onReadingChange={(reading)=>musicRef.current?.setSoft(reading)} /><ProposalTransition /><EndingExperience musicRef={musicRef} /></main></>;
+export default function ProposalExperience() {
+  const [stage, setStage] = useState<ExperienceStage>('locked');
+  const musicRef = useRef<MusicControlHandle>(null);
+  const storyIsActive = stage === 'story';
+
+  useEffect(() => {
+    document.documentElement.classList.toggle('is-locked', !storyIsActive);
+    return () => document.documentElement.classList.remove('is-locked');
+  }, [storyIsActive]);
+
+  if (stage === 'locked') {
+    return <PasswordGate onUnlock={() => setStage('unlocking')} />;
+  }
+
+  if (stage === 'unlocking') {
+    return <PasswordGate unlocked onOpen={() => setStage('opening')} />;
+  }
+
+  if (stage === 'opening') {
+    return <OpeningScene standalone onComplete={() => setStage('story')} />;
+  }
+
+  return (
+    <>
+      <MusicControl ref={musicRef} start={storyIsActive} />
+      <StoryProgress />
+      <MobileProgress />
+      <main className="bg-espresso text-ivory">
+        <BeginningSection />
+        <FirstMessageSection />
+        <MemoryTimeline />
+        <WhyYouSection />
+        <SmallThings />
+        <LoveLetter onReadingChange={(reading) => musicRef.current?.setSoft(reading)} />
+        <ProposalTransition />
+        <EndingExperience musicRef={musicRef} />
+      </main>
+    </>
+  );
 }

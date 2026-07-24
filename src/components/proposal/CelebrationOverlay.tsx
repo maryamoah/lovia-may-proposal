@@ -1,41 +1,46 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { story } from '@/data/story';
 import { OptionalImage } from './OptionalImage';
 
-type CelebrationPhase = 'pause' | 'chosen' | 'video' | 'final';
+type CelebrationStage = 'pause' | 'chosen' | 'video' | 'celebration';
 
 type Props = {
   onReplay: () => void;
   onReadLetter: () => void;
 };
 
-const phaseDurations: Record<Exclude<CelebrationPhase, 'final'>, number> = {
+const stageDurations: Record<Exclude<CelebrationStage, 'video' | 'celebration'>, number> = {
   pause: 900,
   chosen: 2100,
-  video: 8500,
 };
 
 export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
-  const [phase, setPhase] = useState<CelebrationPhase>('pause');
+  const [stage, setStage] = useState<CelebrationStage>('pause');
   const [videoFailed, setVideoFailed] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (phase === 'final') return;
+    if (stage === 'video' || stage === 'celebration') return;
 
     const timeout = window.setTimeout(() => {
-      if (phase === 'pause') setPhase('chosen');
-      if (phase === 'chosen') setPhase('video');
-      if (phase === 'video') setPhase('final');
-    }, phaseDurations[phase]);
+      if (stage === 'pause') setStage('chosen');
+      if (stage === 'chosen') setStage('video');
+    }, stageDurations[stage]);
 
     return () => window.clearTimeout(timeout);
-  }, [phase]);
+  }, [stage]);
 
-  function finishVideo() {
-    setPhase('final');
+  useEffect(() => {
+    if (stage !== 'video' || !videoRef.current) return;
+
+    videoRef.current.currentTime = 0;
+  }, [stage]);
+
+  function handleVideoError() {
+    setVideoFailed(true);
   }
 
   return (
@@ -49,7 +54,7 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(185,152,91,.24),transparent_34%),linear-gradient(rgba(27,18,14,.2),rgba(27,18,14,.78))]" />
 
       <AnimatePresence mode="wait">
-        {phase === 'pause' ? (
+        {stage === 'pause' ? (
           <motion.div
             key="pause"
             initial={{ opacity: 0 }}
@@ -60,7 +65,7 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
           />
         ) : null}
 
-        {phase === 'chosen' ? (
+        {stage === 'chosen' ? (
           <motion.div
             key="chosen"
             initial={{ opacity: 0, y: 18 }}
@@ -74,7 +79,7 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
           </motion.div>
         ) : null}
 
-        {phase === 'video' ? (
+        {stage === 'video' ? (
           <motion.div
             key="video"
             initial={{ opacity: 0, scale: 0.98 }}
@@ -85,33 +90,27 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
           >
             <p className="eyebrow mb-5 text-gold">{story.yes.videoLabel}</p>
             {videoFailed ? (
-              <button
-                onClick={finishVideo}
-                className="mx-auto grid aspect-video w-full place-items-center border border-gold/30 bg-ivory/5 px-6 font-serif text-3xl text-ivory/80"
-              >
+              <div className="mx-auto grid aspect-video w-full place-items-center border border-gold/30 bg-ivory/5 px-6 font-serif text-3xl text-ivory/80">
                 {story.yes.videoFallback}
-              </button>
+              </div>
             ) : (
-              <video
-                className="aspect-video w-full rounded-sm border border-gold/35 bg-black object-contain shadow-[0_30px_100px_rgba(0,0,0,.45)]"
-                autoPlay
-                muted
-                playsInline
-                preload="metadata"
-                poster={story.media.feltAtHome}
-                onEnded={finishVideo}
-                onError={() => setVideoFailed(true)}
-              >
-                <source src={story.media.celebrationVideo} type="video/mp4" />
-              </video>
+              <div className="aspect-video w-full rounded-sm border border-gold/35 bg-black shadow-[0_30px_100px_rgba(0,0,0,.45)]">
+                <video
+                  ref={videoRef}
+                  src="/video/our-memory.mp4"
+                  playsInline
+                  preload="auto"
+                  controls
+                  className="h-full w-full object-contain"
+                  onEnded={() => setStage('celebration')}
+                  onError={handleVideoError}
+                />
+              </div>
             )}
-            <button onClick={finishVideo} className="mt-6 text-xs uppercase tracking-[.24em] text-ivory/55 underline decoration-gold/40 underline-offset-8">
-              Continue to celebration
-            </button>
           </motion.div>
         ) : null}
 
-        {phase === 'final' ? (
+        {stage === 'celebration' ? (
           <motion.div key="final" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="relative max-w-3xl py-12">
             <div className="pointer-events-none absolute inset-0">
               {Array.from({ length: 36 }).map((_, i) => (

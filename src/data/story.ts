@@ -49,15 +49,15 @@ export const story = {
     heading: 'The message I am still grateful I sent.',
     annotation: 'I had no idea this would become us.',
     floatingDate: '14 April 2026',
-    placeholder: 'Add first-instagram-message.jpg to preserve the beginning here.',
+    placeholder: 'Add first-instagram-message.jpg to keep this message here.',
   },
   memories: [
     { eyebrow: '14 April 2026', title: 'The first message', caption: 'One message opened the door to conversations that soon became the best part of my days.' },
     { eyebrow: '19 June 2026', title: 'The day we finally met', caption: 'You were shy but welcoming. I wanted you to feel comfortable, but somehow you were the one who made everything feel easy.', image: 'feltAtHomeTogether' },
-    { eyebrow: 'Quiet ordinary moment', title: 'When ordinary started feeling special', caption: 'No grand plan, no big announcement. Just the two of us walking side by side, making a normal day feel like something I would want to remember forever.', image: 'walkSideBySide' },
+    { eyebrow: 'Quiet moment', title: 'When a simple day stayed with me', caption: 'No grand plan, no big announcement. Just the two of us walking side by side, making an ordinary day something I would want to remember forever.', image: 'walkSideBySide' },
     { eyebrow: 'A promise I mean', title: 'I want to hold your hand through this life', caption: 'Not only when everything is easy, but through the learning, the growing, the soft days and the uncertain ones. I want my hand to be a place you can trust.', image: 'holdingHands' },
-    { eyebrow: 'Cape Coast', title: 'Where I knew', caption: 'Somewhere between the journey, the waakye, the hotel and the quiet moments together, I realised I was no longer simply enjoying your company. I had found my person.', image: 'capeCoast' },
-    { eyebrow: 'Côte d’Ivoire and everything after', title: 'The adventures that became ours', caption: 'Two girls, zero French and one mission: attiéké. Then came Kumasi, Tea Bar, movie dates, Konongo and all the ordinary moments I now treasure.', image: 'attiekeFunnyMoment' },
+    { eyebrow: 'Côte d’Ivoire and everything after', title: 'The adventures that became ours', caption: 'Two girls, zero French and one mission: attiéké. Then came Kumasi, Tea Bar, movie dates, Konongo, and the little plans I now treasure.', image: 'attiekeFunnyMoment' },
+    { eyebrow: 'Cape Coast', title: 'Where I knew', caption: 'Somewhere between the drive, the waakye, the hotel, and being beside you, I realised I was no longer simply enjoying your company. I had found my person.', image: 'capeCoast' },
   ] satisfies Memory[],
   video: {
     heading: 'One memory deserves to move.',
@@ -74,7 +74,7 @@ export const story = {
       { title: 'She stays', text: 'You kept your word when staying would have been easier to avoid.' },
       { title: 'Ambitious', text: 'You make me proud of who you are and excited for who you are becoming.' },
       { title: 'Loving', text: 'You communicate your love clearly. I never have to guess.' },
-      { title: 'Safe', text: 'With you, I can be honest, vulnerable, playful and fully myself.' },
+      { title: 'Gentle with me', text: 'With you, I can be honest, vulnerable, playful and fully myself.' },
     ] satisfies Quality[],
   },
   smallThings: {
@@ -82,7 +82,7 @@ export const story = {
     lines: [
       'The way you talk to me when something is wrong.',
       'The way you remain soft without being weak.',
-      'The way you make ordinary plans feel exciting.',
+      'The way you make simple plans feel exciting.',
       'Your puffy morning eyes.',
       'Our long conversations.',
       'The comfort of knowing I can tell you everything.',
@@ -93,19 +93,19 @@ export const story = {
   letterPostscript: 'P.S. I still plan to disturb you with my long conversations.',
   letter: `My Mommie,
 
-I have never felt this much peace in love before. Loving you has been one of the calmest and most reassuring feelings I have ever experienced. Being in your arms feels safe, and your love never leaves me questioning your intentions with me.
+I have never felt this much peace in love before. Loving you has been one of the calmest and most reassuring feelings I have ever experienced. In your arms, I can rest, and your love never leaves me questioning your intentions with me.
 
 This is the kind of love I have been searching for, and with you, I believe my search is over. I want to wake up to your gorgeous, puffy eyes and kiss your forehead. I want to sit with you through the hard days, laugh with you on the good ones, and cheer for every win coming your way.
 
 I want to cry with you, learn with you and from you, and become better for you and for the life we could build together. I want to come home and tell you everything about my day—the good, the bad, and every random detail in between.
 
-I want to discover life with you. I want us to walk side by side. I want to disturb you with my long conversations, play with you, and keep being childish around you. I hope we never lose the friendship, honesty, and comfort we have found in each other.
+I want to discover life with you, walk side by side, disturb you with my long conversations, play with you, and keep being childish around you. I hope we never lose the friendship, honesty, and comfort we have found in each other.
 
 Even on difficult days, I hope we choose each other, love each other, and still like each other. I hope we remain committed, stay true to what we feel, and realise our dreams together.
 
 Always yours,
 May`,
-  transitionToProposal: ['I have told you how we began.', 'I have told you what I see in you.', 'There is only one thing left to ask.'],
+  transitionToProposal: ['I have told you what I remember.', 'I have told you what I see in you.', 'There is only one thing left to ask.'],
   proposal: {
     eyebrow: 'The question',
     lines: ['Lovia…', 'I cannot imagine a better love story than ours.', 'Will you walk this journey of discovery with me, Mommie…', '…and officially be my girlfriend?'],

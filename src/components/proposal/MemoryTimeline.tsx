@@ -22,16 +22,15 @@ export function MemoryTimeline() {
   const firstMeeting = story.memories[1];
   const quietOrdinary = story.memories[2];
   const holdingHands = story.memories[3];
-  const capeCoast = story.memories[4];
-  const attieke = story.memories[5];
+  const attieke = story.memories[4];
+  const capeCoast = story.memories[5];
 
   return (
     <section id="memories" className="text-espresso">
       <section data-navigation-theme="dark" className="relative overflow-hidden bg-espresso text-ivory">
         <div className="mx-auto grid w-full max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:px-12 lg:py-24">
-          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }} className="relative min-h-[22rem] overflow-hidden rounded-sm sm:min-h-[30rem] lg:min-h-[34rem]">
+          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }} className="relative aspect-[4/5] overflow-hidden rounded-sm border border-gold/20 bg-ivory/5 shadow-[0_24px_70px_rgba(0,0,0,.16)] sm:aspect-[3/2] lg:aspect-[4/5]">
             <Image src={story.media.feltAtHomeTogether} alt="May and Lovia feeling at home together" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-contain" />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(27,18,14,.18),rgba(27,18,14,.72)),linear-gradient(0deg,rgba(27,18,14,.75),transparent_45%)]" />
           </motion.div>
           <div className="relative">
             <div className="max-w-xl">
@@ -58,6 +57,26 @@ export function MemoryTimeline() {
         </div>
       </section>
 
+      <section className="relative overflow-hidden bg-[var(--ivory)] text-[var(--espresso)]">
+        <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+          <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+            <div className="min-w-0">
+              <p className="eyebrow text-gold">A funny little chapter</p>
+              <h2 className="mt-4 font-serif text-[clamp(2.2rem,5.4vw,4.8rem)] leading-[1.02] tracking-[-.035em]">Côte d’Ivoire, zero French, and one mission.</h2>
+              <p className="eyebrow mt-7 text-gold">{attieke.eyebrow}</p>
+              <h3 className="mt-3 font-serif text-[clamp(1.9rem,4vw,3.35rem)] leading-tight">{attieke.title}</h3>
+              <p className="story-copy mt-5 max-w-2xl text-lg leading-8 text-espresso/68">{attieke.caption}</p>
+            </div>
+
+            <div className="min-w-0">
+              <div className="overflow-hidden rounded-sm border border-gold/30 bg-cream shadow-[0_22px_60px_rgba(27,18,14,.08)]">
+                <OptionalImage src={story.media.attiekeFunnyMoment} alt={attieke.title} className="aspect-[4/3] w-full" imageClassName="object-contain" sizes="(min-width: 1024px) 55vw, 100vw" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section data-navigation-theme="dark" className="relative overflow-hidden bg-espresso px-5 py-16 text-ivory sm:px-8 lg:px-12 lg:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.45 }} transition={baseTransition} className="order-2 lg:order-1">
@@ -75,7 +94,7 @@ export function MemoryTimeline() {
 
       <section data-navigation-theme="dark" className="relative overflow-hidden bg-cream px-5 py-20 text-center sm:px-10 lg:py-28">
         <motion.div initial={{ scale: 1.08, opacity: 0 }} whileInView={{ scale: 1, opacity: 1 }} viewport={{ once: true, amount: 0.35 }} transition={{ ...baseTransition, duration: 0.55 }} className="absolute inset-0">
-          <OptionalImage src={story.media.capeCoast} alt={capeCoast.title} className="h-full w-full" sizes="100vw" />
+          <OptionalImage src={story.media.capeCoast} alt={capeCoast.title} className="h-full w-full" imageClassName="object-cover" sizes="100vw" />
           <div className="absolute inset-0 bg-[linear-gradient(rgba(27,18,14,.58),rgba(27,18,14,.62))]" />
         </motion.div>
         <div className="relative mx-auto max-w-4xl py-10 text-ivory">
@@ -90,28 +109,6 @@ export function MemoryTimeline() {
           </div>
         </div>
       </section>
-
-      <section className="relative overflow-hidden bg-[var(--ivory)] text-[var(--espresso)]">
-        <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
-          <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-            <div className="min-w-0">
-              <p className="eyebrow text-gold">A funny little chapter</p>
-              <h2 className="mt-4 font-serif text-[clamp(2.2rem,5.4vw,4.8rem)] leading-[1.02] tracking-[-.035em]">Côte d’Ivoire, zero French, and one mission.</h2>
-              <p className="eyebrow mt-7 text-gold">{attieke.eyebrow}</p>
-              <h3 className="mt-3 font-serif text-[clamp(1.9rem,4vw,3.35rem)] leading-tight">{attieke.title}</h3>
-              <p className="story-copy mt-5 max-w-2xl text-lg leading-8 text-espresso/68">{attieke.caption}</p>
-            </div>
-
-            <div className="min-w-0">
-              <div className="overflow-hidden rounded-sm border border-gold/30 bg-cream shadow-[0_22px_60px_rgba(27,18,14,.08)]">
-                <OptionalImage src={story.media.attiekeFunnyMoment} alt={attieke.title} className="aspect-[4/3] w-full" sizes="(min-width: 1024px) 55vw, 100vw" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
 
     </section>
   );

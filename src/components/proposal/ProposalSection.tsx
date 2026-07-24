@@ -49,10 +49,10 @@ export function ProposalSection({ onYes }: ProposalSectionProps) {
           ))}
         </div>
         <motion.div variants={revealUp} className="relative mx-auto mt-10 flex min-h-24 max-w-sm items-center justify-center gap-4 overflow-visible px-6">
-          <button onClick={onYes} className="btn-primary rounded-none shadow-[0_18px_45px_rgba(0,0,0,.18)]">
+          <button type="button" onClick={onYes} className="btn-primary rounded-none shadow-[0_18px_45px_rgba(0,0,0,.18)]">
             Yes, May
           </button>
-          <motion.button animate={off} transition={{ type: 'spring', stiffness: 360, damping: 26 }} onMouseEnter={moveNo} onClick={moveNo} className="btn-secondary rounded-none">
+          <motion.button type="button" animate={off} transition={{ type: 'spring', stiffness: 360, damping: 26 }} onMouseEnter={moveNo} onClick={moveNo} className="btn-secondary rounded-none">
             Not yet
           </motion.button>
         </motion.div>

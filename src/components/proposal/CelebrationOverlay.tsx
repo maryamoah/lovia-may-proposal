@@ -39,6 +39,13 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
     videoRef.current.currentTime = 0;
   }, [stage]);
 
+  useEffect(() => {
+    if (stage !== 'video' || !videoFailed) return;
+
+    const timeout = window.setTimeout(() => setStage('celebration'), 2600);
+    return () => window.clearTimeout(timeout);
+  }, [stage, videoFailed]);
+
   function handleVideoError() {
     setVideoFailed(true);
   }
@@ -90,7 +97,7 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
           >
             <p className="eyebrow mb-5 text-gold">{story.yes.videoLabel}</p>
             {videoFailed ? (
-              <div className="mx-auto grid aspect-video w-full place-items-center border border-gold/30 bg-ivory/5 px-6 font-serif text-3xl text-ivory/80">
+              <div className="mx-auto grid aspect-video w-full place-items-center rounded-sm border border-gold/30 bg-ivory/5 px-6 font-serif text-3xl text-ivory/80">
                 {story.yes.videoFallback}
               </div>
             ) : (
@@ -134,8 +141,8 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
             </div>
             <p className="mt-6 font-serif text-2xl text-gold">{story.yes.finalLine}</p>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
-              <button onClick={onReplay} className="border border-gold/60 px-6 py-3 text-xs uppercase tracking-[.24em] text-gold">Replay our story</button>
-              <button onClick={onReadLetter} className="border border-ivory/25 px-6 py-3 text-xs uppercase tracking-[.24em] text-ivory/75">Read the letter again</button>
+              <button type="button" onClick={onReplay} className="btn-secondary">Replay our story</button>
+              <button type="button" onClick={onReadLetter} className="btn-secondary">Read the letter again</button>
             </div>
           </motion.div>
         ) : null}

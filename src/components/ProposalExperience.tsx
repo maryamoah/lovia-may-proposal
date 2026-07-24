@@ -1,5 +1,6 @@
 'use client';
 
+import { MotionConfig } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { BeginningSection } from './proposal/BeginningSection';
 import { LoveLetter } from './proposal/LoveLetter';
@@ -27,19 +28,19 @@ export default function ProposalExperience() {
   }, [storyIsActive]);
 
   if (stage === 'locked') {
-    return <PasswordGate onUnlock={() => setStage('unlocking')} />;
+    return <MotionConfig reducedMotion="user"><PasswordGate onUnlock={() => setStage('unlocking')} /></MotionConfig>;
   }
 
   if (stage === 'unlocking') {
-    return <PasswordGate unlocked onOpen={() => setStage('opening')} />;
+    return <MotionConfig reducedMotion="user"><PasswordGate unlocked onOpen={() => setStage('opening')} /></MotionConfig>;
   }
 
   if (stage === 'opening') {
-    return <OpeningScene standalone onComplete={() => setStage('story')} />;
+    return <MotionConfig reducedMotion="user"><OpeningScene standalone onComplete={() => setStage('story')} /></MotionConfig>;
   }
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <MusicControl ref={musicRef} start={storyIsActive} />
       <MobileProgress />
       <main className="bg-espresso text-ivory">
@@ -52,6 +53,6 @@ export default function ProposalExperience() {
         <ProposalTransition />
         <EndingExperience musicRef={musicRef} />
       </main>
-    </>
+    </MotionConfig>
   );
 }

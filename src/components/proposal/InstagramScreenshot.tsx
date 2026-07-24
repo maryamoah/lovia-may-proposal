@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { story } from '@/data/story';
 import { OptionalImage } from './OptionalImage';
-import { baseTransition } from './motion';
+import { overlayFade } from './motion';
 
 type InstagramScreenshotProps = { src?: string };
 
@@ -69,10 +69,10 @@ export function InstagramScreenshot({ src }: InstagramScreenshotProps) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="instagram-lightbox-title"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={baseTransition}
+            variants={overlayFade}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             className="fixed inset-0 z-[80] grid place-items-center bg-espresso/95 p-4 backdrop-blur"
             onClick={() => setExpanded(false)}
           >

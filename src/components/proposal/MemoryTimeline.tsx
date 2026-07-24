@@ -21,7 +21,7 @@ export function MemoryTimeline() {
       <section ref={stickyRef} data-navigation-theme="dark" className="relative min-h-[145dvh] bg-espresso text-ivory">
         <div className="sticky top-0 grid min-h-dvh overflow-hidden lg:grid-cols-[1.15fr_.85fr]">
           <motion.div style={{ scale: imageScale, y: imageY }} className="relative min-h-[55dvh] lg:min-h-dvh">
-            <OptionalImage src={story.media.firstMeeting} alt={firstMeeting.title} className="absolute inset-0" sizes="(min-width: 1024px) 58vw, 100vw" />
+            <OptionalImage src={story.media.feltAtHome} alt={firstMeeting.title} className="absolute inset-0" sizes="(min-width: 1024px) 58vw, 100vw" />
             <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(27,18,14,.18),rgba(27,18,14,.72)),linear-gradient(0deg,rgba(27,18,14,.75),transparent_45%)]" />
           </motion.div>
           <div className="relative grid place-items-center px-6 py-16 lg:min-h-dvh lg:px-12">
@@ -47,7 +47,10 @@ export function MemoryTimeline() {
             <h2 className="mt-4 font-serif text-[clamp(2.2rem,5.4vw,4.8rem)] leading-[1.02] tracking-[-.035em]">Côte d’Ivoire, zero French, and one mission.</h2>
           </div>
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }} className="relative border-y border-gold/35 py-8">
-            <p className="eyebrow text-gold">{attieke.eyebrow}</p>
+            <div className="overflow-hidden rounded-sm border border-gold/30 bg-cream shadow-[0_22px_60px_rgba(27,18,14,.08)]">
+              <OptionalImage src={story.media.attiekeFunnyMoment} alt={attieke.title} className="aspect-[4/3] w-full" sizes="(min-width: 1024px) 55vw, 100vw" />
+            </div>
+            <p className="eyebrow mt-7 text-gold">{attieke.eyebrow}</p>
             <h3 className="mt-3 font-serif text-[clamp(1.9rem,4vw,3.35rem)] leading-tight">{attieke.title}</h3>
             <p className="story-copy mt-5 max-w-2xl text-lg leading-8 text-espresso/68">{attieke.caption}</p>
           </motion.div>

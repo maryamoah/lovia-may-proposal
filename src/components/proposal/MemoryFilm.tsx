@@ -16,7 +16,7 @@ export function MemoryFilm() {
         </div>
         <div className="overflow-hidden rounded-sm border border-gold/45 bg-espresso p-2 shadow-[0_28px_80px_rgba(27,18,14,.18)]">
           <video className="aspect-video w-full object-contain" controls muted playsInline preload="metadata" poster={story.media.capeCoast} onError={() => setFailed(true)}>
-            <source src={story.media.memoryVideo} type="video/mp4" />
+            <source src={story.media.celebrationVideo} type="video/mp4" />
           </video>
         </div>
       </div>

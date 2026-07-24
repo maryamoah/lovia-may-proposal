@@ -2,7 +2,8 @@ export type NavigationTheme = 'light' | 'dark';
 
 export type StoryImageRole =
   | 'firstMessageScreenshot'
-  | 'firstMeeting'
+  | 'attiekeFunnyMoment'
+  | 'feltAtHome'
   | 'capeCoast'
   | 'portrait'
   | 'proposal'
@@ -19,13 +20,11 @@ export const story = {
   passwords: ['19062026', '190626', 'mommie'],
   media: {
     firstMessageScreenshot: '/images/first-instagram-message.jpg',
-    firstMeeting: '/images/first-meeting.jpg',
+    attiekeFunnyMoment: '/images/attieke-funny-moment.jpg',
     capeCoast: '/images/cape-coast.jpg',
+    feltAtHome: '/images/felt-at-home.jpg',
     portrait: '/images/lovia-portrait.jpg',
-    proposalImage: '/images/proposal.jpg',
-    celebrationImage: '/images/celebration.jpg',
     celebrationVideo: '/video/our-memory.mp4',
-    memoryVideo: '/video/our-memory.mp4',
     music: '/audio/sweet-lady.mp3',
   },
   progressLabels: [
@@ -49,9 +48,9 @@ export const story = {
   },
   memories: [
     { eyebrow: '14 April 2026', title: 'The first message', caption: 'One message opened the door to conversations that soon became the best part of my days.' },
-    { eyebrow: '19 June 2026', title: 'The day we finally met', caption: 'You were shy but welcoming. I wanted you to feel comfortable, but somehow you were the one who made everything feel easy.', image: 'firstMeeting' },
+    { eyebrow: '19 June 2026', title: 'The day we finally met', caption: 'You were shy but welcoming. I wanted you to feel comfortable, but somehow you were the one who made everything feel easy.', image: 'feltAtHome' },
     { eyebrow: 'Cape Coast', title: 'Where I knew', caption: 'Somewhere between the journey, the waakye, the hotel and the quiet moments together, I realised I was no longer simply enjoying your company. I had found my person.', image: 'capeCoast' },
-    { eyebrow: 'Côte d’Ivoire and everything after', title: 'The adventures that became ours', caption: 'Two girls, zero French and one mission: attiéké. Then came Kumasi, Tea Bar, movie dates, Konongo and all the ordinary moments I now treasure.' },
+    { eyebrow: 'Côte d’Ivoire and everything after', title: 'The adventures that became ours', caption: 'Two girls, zero French and one mission: attiéké. Then came Kumasi, Tea Bar, movie dates, Konongo and all the ordinary moments I now treasure.', image: 'attiekeFunnyMoment' },
   ] satisfies Memory[],
   video: {
     heading: 'One memory deserves to move.',

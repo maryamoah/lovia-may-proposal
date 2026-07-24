@@ -98,7 +98,7 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
                 muted
                 playsInline
                 preload="metadata"
-                poster={story.media.celebrationImage}
+                poster={story.media.feltAtHome}
                 onEnded={finishVideo}
                 onError={() => setVideoFailed(true)}
               >
@@ -125,7 +125,7 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
                 />
               ))}
             </div>
-            <OptionalImage src={story.media.celebrationImage} alt="May and Lovia celebrating" className="mx-auto mb-8 aspect-[4/3] w-full max-w-md border border-gold/25" />
+            <OptionalImage src={story.media.portrait} alt="May and Lovia celebrating" className="mx-auto mb-8 aspect-[4/3] w-full max-w-md border border-gold/25" />
             <div className="space-y-3">
               {story.yes.finalSequence.map((line, i) => (
                 <motion.p key={line} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 + i * 0.3 }} className={i === 0 ? 'font-serif text-[clamp(3rem,10vw,7rem)] leading-none' : 'font-serif text-2xl italic text-ivory/85'}>

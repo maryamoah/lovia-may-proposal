@@ -3,7 +3,6 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { story } from "@/data/story";
-import { OptionalImage } from "./OptionalImage";
 import {
   imageReveal,
   overlayFade,
@@ -192,11 +191,6 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
               : null}
           </div>
           <div className="relative z-10">
-            <OptionalImage
-              src={story.media.celebration}
-              alt="May and Lovia celebrating"
-              className="mx-auto mb-6 aspect-[4/3] w-full max-w-[min(100%,24rem)] sm:mb-8 sm:max-w-md border border-gold/25"
-            />
             <div className="space-y-3">
               {story.yes.finalSequence.map((line, i) => (
                 <motion.p

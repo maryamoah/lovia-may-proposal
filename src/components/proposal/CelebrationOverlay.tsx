@@ -14,9 +14,20 @@ type Props = {
 };
 
 const stageDurations: Record<Exclude<CelebrationStage, 'video' | 'celebration'>, number> = {
-  pause: 900,
-  chosen: 2100,
+  pause: 700,
+  chosen: 1900,
 };
+
+const finaleFade = { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const };
+const confettiPieces = Array.from({ length: 42 }, (_, i) => ({
+  id: i,
+  left: i % 2 === 0 ? 4 + ((i * 11) % 24) : 72 + ((i * 13) % 23),
+  delay: (i % 12) * 0.08,
+  duration: 4.5 + (i % 6) * 0.35,
+  size: 5 + (i % 4),
+  drift: i % 2 === 0 ? 18 + (i % 5) * 4 : -18 - (i % 5) * 4,
+  ivory: i % 3 === 0,
+}));
 
 export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
   const [stage, setStage] = useState<CelebrationStage>('pause');
@@ -44,7 +55,7 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
   useEffect(() => {
     if (stage !== 'video' || !videoFailed) return;
 
-    const timeout = window.setTimeout(() => setStage('celebration'), 2600);
+    const timeout = window.setTimeout(() => setStage('celebration'), 1200);
     return () => window.clearTimeout(timeout);
   }, [stage, videoFailed]);
 
@@ -63,7 +74,7 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
       <div className="absolute inset-0 light-leak" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(185,152,91,.24),transparent_34%),linear-gradient(rgba(27,18,14,.2),rgba(27,18,14,.78))]" />
 
-      <AnimatePresence mode="wait">
+      <AnimatePresence initial={false}>
         {stage === 'pause' ? (
           <motion.div
             key="pause"
@@ -81,7 +92,7 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
             variants={sceneReveal}
             initial="hidden"
             animate="visible"
-            exit="hidden"
+            exit={{ opacity: 0, y: -12, transition: finaleFade }}
             className="relative max-w-3xl"
           >
             <p className="eyebrow text-gold">{story.yes.eyebrow}</p>
@@ -95,7 +106,7 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
             variants={imageReveal}
             initial="hidden"
             animate="visible"
-            exit="hidden"
+            exit={{ opacity: 0, scale: 0.995, transition: finaleFade }}
             className="relative w-full max-w-5xl"
           >
             <p className="eyebrow mb-5 text-gold">{story.yes.videoLabel}</p>
@@ -121,31 +132,39 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
         ) : null}
 
         {stage === 'celebration' ? (
-          <motion.div key="final" variants={overlayFade} initial="hidden" animate="visible" exit="exit" className="relative max-w-3xl py-12">
-            <div className="pointer-events-none absolute inset-0">
-              {!reduceMotion ? Array.from({ length: 36 }).map((_, i) => (
+          <motion.div
+            key="final"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: finaleFade }}
+            exit={{ opacity: 0, transition: overlayTransition }}
+            className="relative max-w-3xl py-12"
+          >
+            <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden="true">
+              {!reduceMotion ? confettiPieces.map((piece) => (
                 <motion.span
-                  key={i}
-                  initial={{ y: '-12vh', opacity: 0 }}
-                  animate={{ y: '76vh', opacity: [0, 1, 0], rotate: 160 }}
-                  transition={{ ...overlayTransition, duration: 2 + (i % 5) * 0.16, delay: i * 0.02 }}
-                  className="absolute h-2 w-1 bg-gold/75"
-                  style={{ left: `${(i * 29) % 100}%` }}
+                  key={piece.id}
+                  initial={{ x: 0, y: '-8vh', opacity: 0, rotate: 0 }}
+                  animate={{ x: piece.drift, y: '108vh', opacity: [0, 0.85, 0.85, 0], rotate: 180 }}
+                  transition={{ duration: piece.duration, delay: piece.delay, ease: 'easeOut' }}
+                  className={piece.ivory ? 'absolute rounded-full bg-ivory/70 shadow-[0_0_12px_rgba(255,248,229,.2)]' : 'absolute rounded-[1px] bg-gold/75 shadow-[0_0_14px_rgba(185,152,91,.28)]'}
+                  style={{ left: `${piece.left}%`, height: piece.size, width: piece.ivory ? piece.size : Math.max(2, piece.size - 3) }}
                 />
               )) : null}
             </div>
-            <OptionalImage src={story.media.celebration} alt="May and Lovia celebrating" className="mx-auto mb-8 aspect-[4/3] w-full max-w-md border border-gold/25" />
-            <div className="space-y-3">
-              {story.yes.finalSequence.map((line, i) => (
-                <motion.p key={line} variants={textReveal} initial="hidden" animate="visible" transition={{ ...textTransition, delay: 0.25 + i * 0.08 }} className={i === 0 ? 'font-serif text-[clamp(3rem,10vw,7rem)] leading-none' : 'font-serif text-2xl italic text-ivory/85'}>
-                  {line}
-                </motion.p>
-              ))}
-            </div>
-            <p className="mt-6 font-serif text-2xl text-gold">{story.yes.finalLine}</p>
-            <div className="mt-10 flex flex-wrap justify-center gap-3">
-              <button type="button" onClick={onReplay} className="btn-secondary">Replay our story</button>
-              <button type="button" onClick={onReadLetter} className="btn-secondary">Read the letter again</button>
+            <div className="relative z-10">
+              <OptionalImage src={story.media.celebration} alt="May and Lovia celebrating" className="mx-auto mb-8 aspect-[4/3] w-full max-w-md border border-gold/25" />
+              <div className="space-y-3">
+                {story.yes.finalSequence.map((line, i) => (
+                  <motion.p key={line} variants={textReveal} initial="hidden" animate="visible" transition={{ ...textTransition, delay: 0.12 + i * 0.08 }} className={i === 0 ? 'font-serif text-[clamp(3rem,10vw,7rem)] leading-none' : 'font-serif text-2xl italic text-ivory/85'}>
+                    {line}
+                  </motion.p>
+                ))}
+              </div>
+              <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ ...textTransition, delay: 0.28 }} className="mt-6 font-serif text-2xl text-gold">{story.yes.finalLine}</motion.p>
+              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ ...textTransition, delay: 0.42 }} className="mt-10 flex flex-wrap justify-center gap-3">
+                <button type="button" onClick={onReplay} className="btn-secondary">Replay our story</button>
+                <button type="button" onClick={onReadLetter} className="btn-secondary">Read the letter again</button>
+              </motion.div>
             </div>
           </motion.div>
         ) : null}

@@ -3,9 +3,9 @@ export type NavigationTheme = 'light' | 'dark';
 export type StoryImageRole =
   | 'firstMessageScreenshot'
   | 'attiekeFunnyMoment'
-  | 'feltAtHome'
+  | 'feltAtHomeTogether'
   | 'walkSideBySide'
-  | 'promiseToHoldYourHand'
+  | 'holdingHands'
   | 'capeCoast'
   | 'portrait'
   | 'proposal'
@@ -24,9 +24,9 @@ export const story = {
     firstMessageScreenshot: '/images/first-instagram-message.jpg',
     attiekeFunnyMoment: '/images/attieke-funny-moment.jpg',
     capeCoast: '/images/cape-coast.jpg',
-    feltAtHome: '/images/felt-at-home-together.jpg',
+    feltAtHomeTogether: '/images/felt-at-home-together.jpg',
     walkSideBySide: '/images/walk-side-by-side.jpg',
-    promiseToHoldYourHand: '/images/promise-to-hold-your-hand.jpg',
+    holdingHands: '/images/promise-to-hold-your-hand.jpg',
     portrait: '/images/lovia-portrait.jpg',
     celebration: '/images/celebration.jpg',
     celebrationVideo: '/video/our-memory.mp4',
@@ -53,9 +53,9 @@ export const story = {
   },
   memories: [
     { eyebrow: '14 April 2026', title: 'The first message', caption: 'One message opened the door to conversations that soon became the best part of my days.' },
-    { eyebrow: '19 June 2026', title: 'The day we finally met', caption: 'You were shy but welcoming. I wanted you to feel comfortable, but somehow you were the one who made everything feel easy.', image: 'feltAtHome' },
+    { eyebrow: '19 June 2026', title: 'The day we finally met', caption: 'You were shy but welcoming. I wanted you to feel comfortable, but somehow you were the one who made everything feel easy.', image: 'feltAtHomeTogether' },
     { eyebrow: 'Quiet ordinary moment', title: 'When ordinary started feeling special', caption: 'No grand plan, no big announcement. Just the two of us walking side by side, making a normal day feel like something I would want to remember forever.', image: 'walkSideBySide' },
-    { eyebrow: 'A promise I mean', title: 'I want to hold your hand through this life', caption: 'Not only when everything is easy, but through the learning, the growing, the soft days and the uncertain ones. I want my hand to be a place you can trust.', image: 'promiseToHoldYourHand' },
+    { eyebrow: 'A promise I mean', title: 'I want to hold your hand through this life', caption: 'Not only when everything is easy, but through the learning, the growing, the soft days and the uncertain ones. I want my hand to be a place you can trust.', image: 'holdingHands' },
     { eyebrow: 'Cape Coast', title: 'Where I knew', caption: 'Somewhere between the journey, the waakye, the hotel and the quiet moments together, I realised I was no longer simply enjoying your company. I had found my person.', image: 'capeCoast' },
     { eyebrow: 'Côte d’Ivoire and everything after', title: 'The adventures that became ours', caption: 'Two girls, zero French and one mission: attiéké. Then came Kumasi, Tea Bar, movie dates, Konongo and all the ordinary moments I now treasure.', image: 'attiekeFunnyMoment' },
   ] satisfies Memory[],

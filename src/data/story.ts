@@ -103,6 +103,10 @@ I want to discover life with you, walk side by side, disturb you with my long co
 
 Even on difficult days, I hope we choose each other, love each other, and still like each other. I hope we remain committed, stay true to what we feel, and realise our dreams together.
 
+Alway know that my hands are ready to hold you and reassure you and carry you through whatever life may throw at us. That beautiful smile of yours is something I want to protect with everything inside me. And your heart, oh your warm heart, means the world to me. I want to pour into our love for as long as I breathe and I don't take what we have lightly.
+
+I cherish and adore you so much, my gorgeous girl. 
+
 Always yours,
 May`,
   transitionToProposal: ['I have told you what I remember.', 'I have told you what I see in you.', 'There is only one thing left to ask.'],

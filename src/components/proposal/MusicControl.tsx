@@ -48,7 +48,7 @@ export const MusicControl = forwardRef<MusicControlHandle, MusicControlProps>(fu
       setPlaying(true);
       fadeTo(0.45);
     } catch {
-      setAvailable(false);
+      setPlaying(false);
     }
   }, [available, fadeTo, muted]);
 
@@ -73,16 +73,14 @@ export const MusicControl = forwardRef<MusicControlHandle, MusicControlProps>(fu
     if (start && !muted) void play();
   }, [start, muted, play]);
 
-  if (!available) return null;
-
   return (
     <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-3 z-50 rounded-full border border-gold/35 bg-ivory/90 px-3 py-2 text-[.65rem] uppercase tracking-[.16em] text-espresso shadow-[0_18px_45px_rgba(0,0,0,.18)] backdrop-blur sm:right-4">
       <audio ref={audio} src={story.media.music} loop preload="none" onError={() => setAvailable(false)} />
-      <button onClick={toggle} aria-label="Toggle Sweet Lady music" className="flex items-center gap-2">
+      <button type="button" onClick={toggle} aria-label={available ? 'Toggle Sweet Lady music' : 'Sweet Lady music is unavailable'} disabled={!available} className="flex items-center gap-2 disabled:cursor-default disabled:opacity-65">
         <span aria-hidden="true" className="grid h-5 w-5 place-items-center rounded-full bg-espresso text-[.55rem] text-gold">
-          {playing ? 'Ⅱ' : '▶'}
+          {!available ? '—' : playing ? 'Ⅱ' : '▶'}
         </span>
-        <span>Sweet Lady</span>
+        <span>{available ? 'Sweet Lady' : 'Music unavailable'}</span>
       </button>
     </div>
   );

@@ -36,8 +36,8 @@ export function PasswordGate({ onUnlock, onOpen, unlocked = false }: PasswordGat
             <h1 className="mt-4 font-serif text-balance text-[clamp(2.35rem,10vw,4.5rem)] leading-[.95] tracking-[-.035em]">Enter our date, Mommie.</h1>
             <label className="mt-8 block text-sm text-ivory/62" htmlFor="proposal-password">The day we finally met</label>
             <input id="proposal-password" value={code} onChange={(e) => { setCode(e.target.value); setError(false); }} autoComplete="off" inputMode="text" className="mt-4 w-full rounded-none border-b border-gold/35 bg-transparent px-3 py-4 text-center text-lg tracking-[.24em] text-ivory outline-none transition placeholder:text-ivory/25 focus:border-gold" aria-invalid={error} />
-            <p className="mt-3 min-h-6 text-sm text-blush" aria-live="polite">{error ? 'That is not our key. Try the date May met Lovia.' : ''}</p>
-            <button className="btn-primary mt-5 w-full">Unlock the letter</button>
+            <p className="mt-3 min-h-6 text-sm text-blush" aria-live="polite">{error ? 'Not quite, Mommie. Think of the day we finally met.' : ''}</p>
+            <button className="btn-primary mt-5 w-full">Unlock our story</button>
           </motion.form>
         ) : (
           <motion.div key="seal" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="relative max-w-sm text-center">

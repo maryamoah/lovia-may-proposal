@@ -12,7 +12,6 @@ import { FirstMessageSection } from './proposal/FirstMessageSection';
 import { EndingExperience } from './proposal/EndingExperience';
 import { ProposalTransition } from './proposal/ProposalTransition';
 import { SmallThings } from './proposal/SmallThings';
-import { StoryProgress } from './proposal/StoryProgress';
 import { WhyYouSection } from './proposal/WhyYouSection';
 
 type ExperienceStage = 'locked' | 'unlocking' | 'opening' | 'story';
@@ -42,7 +41,6 @@ export default function ProposalExperience() {
   return (
     <>
       <MusicControl ref={musicRef} start={storyIsActive} />
-      <StoryProgress />
       <MobileProgress />
       <main className="bg-espresso text-ivory">
         <BeginningSection />

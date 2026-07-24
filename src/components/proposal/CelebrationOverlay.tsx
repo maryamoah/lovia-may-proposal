@@ -34,6 +34,7 @@ const stageDurations: Record<
 };
 
 const finaleFade = { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const };
+const videoFade = { duration: 0.3, ease: [0.22, 1, 0.36, 1] as const };
 const confettiPieces = Array.from({ length: 42 }, (_, i) => ({
   id: i,
   left: i % 2 === 0 ? 4 + ((i * 11) % 24) : 72 + ((i * 13) % 23),
@@ -86,9 +87,6 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
       <AnimatePresence
         initial={false}
         mode="wait"
-        onExitComplete={() => {
-          if (stage === "transitioning") setStage("celebration");
-        }}
       >
         {stage === "pause" ? (
           <motion.div
@@ -117,34 +115,50 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
           </motion.div>
         ) : null}
 
-        {stage === "video" ? (
+        {stage === "video" || stage === "transitioning" ? (
           <motion.div
-            key="video"
+            key="proposal-video"
             variants={imageReveal}
             initial="hidden"
             animate="visible"
-            exit={{ opacity: 0, transition: finaleFade }}
-            className="relative w-full max-w-5xl"
+            exit={{ opacity: 0, transition: { duration: 0 } }}
+            className={`relative w-full max-w-5xl ${
+              stage === "transitioning" ? "pointer-events-none" : ""
+            }`}
           >
-            <p className="eyebrow mb-5 text-gold">{story.yes.videoLabel}</p>
-            <div className="aspect-video w-full rounded-sm border border-gold/35 bg-black shadow-[0_30px_100px_rgba(0,0,0,.45)]">
-              <video
-                ref={videoRef}
-                src="/video/our-memory.mp4"
-                playsInline
-                preload="auto"
-                controls
-                className="h-full w-full object-contain"
-                onEnded={finishVideo}
-                onError={finishVideo}
-              />
-            </div>
+            <motion.div
+              animate={{ opacity: stage === "transitioning" ? 0 : 1 }}
+              transition={videoFade}
+              onAnimationComplete={() => {
+                if (stage === "transitioning") setStage("celebration");
+              }}
+            >
+              <p className="eyebrow mb-5 text-gold">{story.yes.videoLabel}</p>
+              <div
+                className={`aspect-video w-full ${
+                  stage === "video"
+                    ? "rounded-sm border border-gold/35 bg-black shadow-[0_30px_100px_rgba(0,0,0,.45)]"
+                    : "border-transparent bg-transparent shadow-none"
+                }`}
+              >
+                <video
+                  ref={videoRef}
+                  src="/video/our-memory.mp4"
+                  playsInline
+                  preload="auto"
+                  controls
+                  className="h-full w-full object-contain"
+                  onEnded={finishVideo}
+                  onError={finishVideo}
+                />
+              </div>
+            </motion.div>
           </motion.div>
         ) : null}
 
         {stage === "celebration" ? (
           <motion.div
-            key="celebration"
+            key="yes-celebration"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: finaleFade }}
             exit={{ opacity: 0, transition: overlayTransition }}

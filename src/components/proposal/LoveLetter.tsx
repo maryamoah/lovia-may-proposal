@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { story } from '@/data/story';
-import { baseTransition } from './motion';
+import { overlayTransition, textReveal, textTransition, viewportText } from './motion';
 
 type LoveLetterProps = {
   onReadingChange?: (open: boolean) => void;
@@ -22,7 +22,7 @@ export function LoveLetter({ onReadingChange }: LoveLetterProps) {
       <div className="mx-auto max-w-4xl">
         <div className="text-center">
           {story.letterIntro.map((line, index) => (
-            <motion.p key={line} initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.8 }} transition={{ ...baseTransition, delay: index * 0.08 }} className="font-serif text-2xl italic text-espresso/70 sm:text-3xl">
+            <motion.p key={line} variants={textReveal} initial="hidden" whileInView="visible" viewport={viewportText} transition={{ ...textTransition, delay: index * 0.08 }} className="font-serif text-2xl italic text-espresso/70 sm:text-3xl">
               {line}
             </motion.p>
           ))}
@@ -37,7 +37,7 @@ export function LoveLetter({ onReadingChange }: LoveLetterProps) {
           </div>
           <AnimatePresence initial={false}>
             {open ? (
-              <motion.article id="love-letter-copy" initial={{ height: 0, opacity: 0, rotateX: -8 }} animate={{ height: 'auto', opacity: 1, rotateX: 0 }} exit={{ height: 0, opacity: 0 }} transition={baseTransition} className="overflow-hidden">
+              <motion.article id="love-letter-copy" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={overlayTransition} className="overflow-hidden">
                 <div className="story-copy mx-auto mt-10 max-w-3xl border-t border-gold/25 pt-8 text-[1.08rem] leading-8 text-espresso/82 sm:text-[1.28rem] sm:leading-9">
                   <p className="mb-8 text-right font-sans text-sm uppercase tracking-[.18em] text-gold">{story.letterDate}</p>
                   {story.letter.split('\n\n').map((paragraph) => (

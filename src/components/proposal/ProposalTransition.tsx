@@ -8,7 +8,7 @@ export function ProposalTransition() {
   return (
     <section
       data-navigation-theme="dark"
-      className="bg-espresso safe-px py-14 text-center text-ivory sm:px-8 lg:px-12 lg:py-24"
+      className="section-space bg-espresso safe-px text-center text-ivory"
     >
       <motion.div
         variants={sequenceContainer}

@@ -102,6 +102,10 @@ body {
   background: var(--espresso);
   color: var(--ivory);
 }
+img,
+video {
+  max-width: 100%;
+}
 ::selection {
   background: rgba(169, 137, 82, 0.38);
   color: var(--ivory);
@@ -112,6 +116,7 @@ input {
 }
 button {
   cursor: pointer;
+  touch-action: manipulation;
 }
 button:focus-visible,
 input:focus-visible {
@@ -216,6 +221,23 @@ input:focus-visible {
     radial-gradient(circle at 62% 70%, rgba(80, 0, 0, 0.25), transparent 35%);
 }
 
+/* Fluid primitives keep the story composed between named breakpoints. */
+.section-space {
+  padding-top: clamp(3.5rem, 7vw, 6rem);
+  padding-bottom: clamp(3.5rem, 7vw, 6rem);
+}
+.compact-section-space {
+  padding-top: clamp(3rem, 5vw, 4.5rem);
+  padding-bottom: clamp(3rem, 5vw, 4.5rem);
+}
+.medium-section-space {
+  padding-top: clamp(3.5rem, 6vw, 5rem);
+  padding-bottom: clamp(3.5rem, 6vw, 5rem);
+}
+.invitation-section-space {
+  padding-top: clamp(3rem, 5vw, 4rem);
+  padding-bottom: clamp(3rem, 5vw, 4rem);
+}
 @media (max-width: 640px) {
   .chapter::before {
     inset-inline: max(1.25rem, env(safe-area-inset-left));
@@ -232,6 +254,32 @@ input:focus-visible {
   .memory-note::before {
     left: -0.38em;
     font-size: 3rem;
+  }
+  .btn-primary,
+  .btn-secondary {
+    min-width: min(100%, 8.75rem);
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1023px) {
+  .safe-px,
+  .safe-px-lg {
+    padding-left: max(clamp(2rem, 5vw, 3.5rem), env(safe-area-inset-left));
+    padding-right: max(clamp(2rem, 5vw, 3.5rem), env(safe-area-inset-right));
+  }
+}
+
+@media (max-height: 560px) and (orientation: landscape) {
+  .viewport-scene {
+    min-height: 100dvh;
+    padding-top: max(1rem, env(safe-area-inset-top));
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  .viewport-scene .scene-ornament {
+    margin-top: 0.65rem;
+    margin-bottom: 0.65rem;
+    height: 2.75rem;
+    width: 2.75rem;
   }
 }
 

@@ -41,7 +41,7 @@ export function ProposalSection({ onYes }: ProposalSectionProps) {
     <section
       id="proposal"
       data-navigation-theme="dark"
-      className="relative grid min-h-dvh place-items-center overflow-hidden bg-espresso safe-px min-h-[100svh] py-14 text-center text-ivory sm:py-20 lg:py-24"
+      className="viewport-scene relative grid min-h-[100svh] place-items-center overflow-hidden bg-espresso safe-px py-[clamp(3.5rem,9vh,6rem)] text-center text-ivory"
     >
       {bg ? (
         <Image
@@ -78,7 +78,7 @@ export function ProposalSection({ onYes }: ProposalSectionProps) {
         </div>
         <motion.div
           variants={textReveal}
-          className="relative mx-auto mt-8 flex min-h-20 w-full max-w-sm items-center justify-center gap-3 overflow-visible px-0 sm:mt-10 sm:gap-4"
+          className="relative mx-auto mt-[clamp(2rem,5vh,2.5rem)] flex min-h-20 w-full max-w-sm flex-wrap items-center justify-center gap-3 overflow-visible px-0 sm:gap-4"
         >
           <button
             type="button"

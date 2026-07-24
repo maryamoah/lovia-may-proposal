@@ -6,7 +6,7 @@ export function SmallThings() {
   return (
     <section
       data-navigation-theme="light"
-      className="relative overflow-hidden bg-ivory safe-px py-14 text-espresso sm:px-10 lg:py-20"
+      className="medium-section-space relative overflow-hidden bg-ivory safe-px text-espresso"
       aria-labelledby="small-things-title"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_15%,rgba(169,137,82,.14),transparent_26%),linear-gradient(90deg,rgba(111,36,32,.06),transparent_38%)]" />
@@ -15,7 +15,7 @@ export function SmallThings() {
         initial="hidden"
         whileInView="visible"
         viewport={viewportOnce}
-        className="relative mx-auto grid max-w-6xl gap-9 lg:grid-cols-[.78fr_1.22fr] lg:items-start"
+        className="relative mx-auto grid max-w-6xl gap-9 md:grid-cols-[.78fr_1.22fr] md:items-start"
       >
         <div>
           <motion.p variants={textReveal} className="eyebrow text-gold">
@@ -33,7 +33,7 @@ export function SmallThings() {
             className="mt-7 h-px w-28 bg-gold/45"
           />
         </div>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 min-[520px]:grid-cols-2">
           {story.smallThings.lines.map((line) => (
             <motion.p
               key={line}

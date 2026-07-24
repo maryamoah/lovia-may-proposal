@@ -79,7 +79,7 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="fixed inset-0 z-[60] grid place-items-center overflow-auto bg-espresso safe-px py-[max(1.5rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))] text-center text-ivory"
+      className="fixed inset-0 z-[60] grid place-items-center overflow-x-hidden overflow-y-auto bg-espresso safe-px py-[max(1.5rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))] text-center text-ivory"
     >
       <div className="absolute inset-0 light-leak" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(185,152,91,.24),transparent_34%),linear-gradient(rgba(27,18,14,.2),rgba(27,18,14,.78))]" />
@@ -149,7 +149,7 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: finaleFade }}
             exit={{ opacity: 0, transition: overlayTransition }}
-            className="relative w-full max-w-3xl py-8 sm:py-12"
+            className="relative w-full max-w-3xl py-[clamp(1rem,5vh,3rem)]"
           >
             <div
               className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
@@ -203,8 +203,8 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
                     transition={{ ...textTransition, delay: 0.12 + i * 0.08 }}
                     className={
                       i === 0
-                        ? "font-serif text-[clamp(3rem,10vw,7rem)] leading-none"
-                        : "font-serif text-2xl italic text-ivory/85"
+                        ? "font-serif text-[clamp(2.65rem,10vw,7rem)] leading-none"
+                        : "font-serif text-[clamp(1.25rem,4vw,1.5rem)] italic text-ivory/85"
                     }
                   >
                     {line}
@@ -223,7 +223,7 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ ...textTransition, delay: 0.42 }}
-                className="mt-8 flex flex-wrap justify-center gap-3 sm:mt-10"
+                className="mt-[clamp(1.5rem,4vh,2.5rem)] flex flex-wrap justify-center gap-3"
               >
                 <button
                   type="button"

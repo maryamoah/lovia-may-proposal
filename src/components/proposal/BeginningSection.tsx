@@ -8,7 +8,7 @@ export function BeginningSection() {
     <section
       id="beginning"
       data-navigation-theme="light"
-      className="chapter bg-ivory safe-px py-12 text-espresso sm:px-8 lg:py-16"
+      className="chapter invitation-section-space bg-ivory safe-px text-espresso"
       aria-labelledby="invitation-title"
     >
       <motion.div
@@ -23,7 +23,7 @@ export function BeginningSection() {
           <p className="eyebrow text-gold">A private invitation</p>
           <h2
             id="invitation-title"
-            className="mt-4 font-serif text-balance text-[clamp(2.1rem,5.5vw,4.7rem)] leading-[1.02] tracking-[-.035em]"
+            className="mt-4 font-serif text-balance text-[clamp(2rem,5.5vw,4.7rem)] leading-[1.02] tracking-[-.035em]"
           >
             Before the question, I wanted to bring you back to us.
           </h2>

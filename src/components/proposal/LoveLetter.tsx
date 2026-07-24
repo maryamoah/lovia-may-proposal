@@ -29,7 +29,7 @@ export function LoveLetter({ onReadingChange }: LoveLetterProps) {
       id="letter"
       ref={ref}
       data-navigation-theme="light"
-      className={`relative bg-cream safe-px py-16 text-espresso sm:px-10 lg:py-24 ${open ? "z-10" : ""}`}
+      className={`section-space relative bg-cream safe-px text-espresso ${open ? "z-10" : ""}`}
     >
       <motion.div
         style={{ scaleX: scrollYProgress }}
@@ -53,7 +53,7 @@ export function LoveLetter({ onReadingChange }: LoveLetterProps) {
         </div>
         <motion.div
           layout
-          className="paper mt-8 border border-gold/40 p-5 shadow-[0_28px_90px_rgba(27,18,14,.14)] sm:p-10"
+          className="paper mt-[clamp(2rem,5vw,3rem)] border border-gold/40 p-[clamp(1.25rem,4vw,2.5rem)] shadow-[0_28px_90px_rgba(27,18,14,.14)]"
         >
           <div className="text-center">
             <button
@@ -82,7 +82,7 @@ export function LoveLetter({ onReadingChange }: LoveLetterProps) {
                 transition={overlayTransition}
                 className="overflow-hidden"
               >
-                <div className="story-copy mx-auto mt-10 max-w-3xl border-t border-gold/25 pt-8 text-[1.02rem] leading-7 text-espresso/82 sm:text-[1.28rem] sm:leading-9">
+                <div className="story-copy mx-auto mt-[clamp(2rem,5vw,2.5rem)] max-w-3xl border-t border-gold/25 pt-[clamp(1.5rem,4vw,2rem)] text-[clamp(1rem,1.7vw,1.28rem)] leading-[1.75] text-espresso/82">
                   <p className="mb-8 text-right font-sans text-sm uppercase tracking-[.18em] text-gold">
                     {story.letterDate}
                   </p>

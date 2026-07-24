@@ -9,10 +9,10 @@ export function FirstMessageSection() {
   return (
     <section
       data-navigation-theme="light"
-      className="chapter bg-cream safe-px py-14 text-espresso sm:px-8 lg:py-[4.5rem]"
+      className="chapter compact-section-space bg-cream safe-px text-espresso"
       aria-labelledby="first-message-title"
     >
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2 lg:items-center xl:gap-24">
+      <div className="mx-auto grid max-w-7xl gap-[clamp(2rem,5vw,6rem)] md:grid-cols-[minmax(0,1fr)_minmax(18rem,.8fr)] md:items-center lg:grid-cols-2 xl:gap-24">
         <motion.div
           variants={textReveal}
           initial="hidden"

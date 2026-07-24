@@ -13,7 +13,12 @@ import {
   textTransition,
 } from "./motion";
 
-type CelebrationStage = "pause" | "chosen" | "video" | "celebration";
+type CelebrationStage =
+  | "pause"
+  | "chosen"
+  | "video"
+  | "transitioning"
+  | "celebration";
 
 type Props = {
   onReplay: () => void;
@@ -21,7 +26,7 @@ type Props = {
 };
 
 const stageDurations: Record<
-  Exclude<CelebrationStage, "video" | "celebration">,
+  Exclude<CelebrationStage, "video" | "transitioning" | "celebration">,
   number
 > = {
   pause: 700,
@@ -41,12 +46,11 @@ const confettiPieces = Array.from({ length: 42 }, (_, i) => ({
 
 export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
   const [stage, setStage] = useState<CelebrationStage>("pause");
-  const [videoFailed, setVideoFailed] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    if (stage === "video" || stage === "celebration") return;
+    if (stage !== "pause" && stage !== "chosen") return;
 
     const timeout = window.setTimeout(() => {
       if (stage === "pause") setStage("chosen");
@@ -62,15 +66,10 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
     videoRef.current.currentTime = 0;
   }, [stage]);
 
-  useEffect(() => {
-    if (stage !== "video" || !videoFailed) return;
-
-    const timeout = window.setTimeout(() => setStage("celebration"), 1200);
-    return () => window.clearTimeout(timeout);
-  }, [stage, videoFailed]);
-
-  function handleVideoError() {
-    setVideoFailed(true);
+  function finishVideo() {
+    setStage((currentStage) =>
+      currentStage === "video" ? "transitioning" : currentStage,
+    );
   }
 
   return (
@@ -84,7 +83,13 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
       <div className="absolute inset-0 light-leak" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(185,152,91,.24),transparent_34%),linear-gradient(rgba(27,18,14,.2),rgba(27,18,14,.78))]" />
 
-      <AnimatePresence initial={false}>
+      <AnimatePresence
+        initial={false}
+        mode="wait"
+        onExitComplete={() => {
+          if (stage === "transitioning") setStage("celebration");
+        }}
+      >
         {stage === "pause" ? (
           <motion.div
             key="pause"
@@ -118,34 +123,28 @@ export function CelebrationOverlay({ onReplay, onReadLetter }: Props) {
             variants={imageReveal}
             initial="hidden"
             animate="visible"
-            exit={{ opacity: 0, scale: 0.995, transition: finaleFade }}
+            exit={{ opacity: 0, transition: finaleFade }}
             className="relative w-full max-w-5xl"
           >
             <p className="eyebrow mb-5 text-gold">{story.yes.videoLabel}</p>
-            {videoFailed ? (
-              <div className="mx-auto grid aspect-video w-full place-items-center rounded-sm border border-gold/30 bg-ivory/5 px-6 font-serif text-3xl text-ivory/80">
-                {story.yes.videoFallback}
-              </div>
-            ) : (
-              <div className="aspect-video w-full rounded-sm border border-gold/35 bg-black shadow-[0_30px_100px_rgba(0,0,0,.45)]">
-                <video
-                  ref={videoRef}
-                  src="/video/our-memory.mp4"
-                  playsInline
-                  preload="auto"
-                  controls
-                  className="h-full w-full object-contain"
-                  onEnded={() => setStage("celebration")}
-                  onError={handleVideoError}
-                />
-              </div>
-            )}
+            <div className="aspect-video w-full rounded-sm border border-gold/35 bg-black shadow-[0_30px_100px_rgba(0,0,0,.45)]">
+              <video
+                ref={videoRef}
+                src="/video/our-memory.mp4"
+                playsInline
+                preload="auto"
+                controls
+                className="h-full w-full object-contain"
+                onEnded={finishVideo}
+                onError={finishVideo}
+              />
+            </div>
           </motion.div>
         ) : null}
 
         {stage === "celebration" ? (
           <motion.div
-            key="final"
+            key="celebration"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: finaleFade }}
             exit={{ opacity: 0, transition: overlayTransition }}

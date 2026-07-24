@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { AnimatePresence } from 'framer-motion';
-import { useRef, useState, type RefObject } from 'react';
-import { CelebrationOverlay } from './CelebrationOverlay';
-import { MusicControlHandle } from './MusicControl';
-import { ProposalSection } from './ProposalSection';
+import { AnimatePresence } from "framer-motion";
+import { useRef, useState, type RefObject } from "react";
+import { CelebrationOverlay } from "./CelebrationOverlay";
+import { MusicControlHandle } from "./MusicControl";
+import { ProposalSection } from "./ProposalSection";
 
 type EndingExperienceProps = {
   musicRef: RefObject<MusicControlHandle | null>;
@@ -16,12 +16,18 @@ export function EndingExperience({ musicRef }: EndingExperienceProps) {
 
   function replay() {
     setCelebrating(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   function letterAgain() {
     setCelebrating(false);
-    window.setTimeout(() => document.getElementById('letter')?.scrollIntoView({ behavior: 'smooth' }), 50);
+    window.setTimeout(
+      () =>
+        document
+          .getElementById("letter")
+          ?.scrollIntoView({ behavior: "smooth" }),
+      50,
+    );
   }
 
   function yes() {
@@ -35,7 +41,11 @@ export function EndingExperience({ musicRef }: EndingExperienceProps) {
   return (
     <>
       <ProposalSection onYes={yes} />
-      <AnimatePresence>{celebrating ? <CelebrationOverlay onReplay={replay} onReadLetter={letterAgain} /> : null}</AnimatePresence>
+      <AnimatePresence>
+        {celebrating ? (
+          <CelebrationOverlay onReplay={replay} onReadLetter={letterAgain} />
+        ) : null}
+      </AnimatePresence>
     </>
   );
 }

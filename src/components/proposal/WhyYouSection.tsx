@@ -1,6 +1,89 @@
-'use client';
-import { motion } from 'framer-motion';
-import { story } from '@/data/story';
-import { OptionalImage } from './OptionalImage';
-import { imageReveal, textReveal, sequenceContainer, viewportOnce } from './motion';
-export function WhyYouSection(){return <section id="why-you" data-navigation-theme="dark" className="relative overflow-hidden bg-espresso px-5 py-[4.5rem] text-ivory sm:px-10 lg:py-24"><div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_28%,rgba(169,137,82,.16),transparent_28%)]"/><div className="relative mx-auto grid max-w-6xl gap-9 lg:grid-cols-[.82fr_1.18fr] lg:items-center"><motion.div variants={imageReveal} initial="hidden" whileInView="visible" viewport={viewportOnce} className="relative mx-auto w-full max-w-sm lg:max-w-md"><OptionalImage src={story.media.portrait} alt="Lovia portrait" className="cinematic-frame aspect-[4/5] w-full border border-gold/30" imageClassName="object-cover"/><div className="absolute -bottom-5 left-5 max-w-[15rem] bg-ivory px-5 py-4 text-espresso shadow-xl"><p className="font-serif text-xl italic leading-6">The small truths I keep noticing.</p></div></motion.div><motion.div variants={sequenceContainer} initial="hidden" whileInView="visible" viewport={viewportOnce}><motion.p variants={textReveal} className="eyebrow text-gold">Why you</motion.p><motion.h2 variants={textReveal} className="mt-4 font-serif text-[clamp(2.35rem,6vw,5rem)] leading-none tracking-[-.025em]">{story.whyYou.heading}</motion.h2><motion.p variants={textReveal} className="story-copy mt-6 max-w-xl text-base leading-8 text-ivory/68 sm:text-lg">{story.whyYou.supporting}</motion.p><dl className="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2">{story.whyYou.qualities.map((q)=><motion.div key={q.title} variants={textReveal} className="border-t border-gold/25 pt-4"><dt className="font-serif text-2xl text-ivory sm:text-3xl">{q.title}</dt><dd className="mt-2 text-sm leading-7 text-ivory/65 sm:text-base">{q.text}</dd></motion.div>)}</dl></motion.div></div><motion.p variants={textReveal} initial="hidden" whileInView="visible" viewport={viewportOnce} className="relative mx-auto mt-16 max-w-3xl text-center font-serif text-[clamp(2rem,4.7vw,3.8rem)] leading-tight text-gold">{story.whyYou.finalLine}</motion.p></section>}
+"use client";
+import { motion } from "framer-motion";
+import { story } from "@/data/story";
+import { OptionalImage } from "./OptionalImage";
+import {
+  imageReveal,
+  textReveal,
+  sequenceContainer,
+  viewportOnce,
+} from "./motion";
+export function WhyYouSection() {
+  return (
+    <section
+      id="why-you"
+      data-navigation-theme="dark"
+      className="relative overflow-hidden bg-espresso safe-px py-16 text-ivory sm:px-10 lg:py-24"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_28%,rgba(169,137,82,.16),transparent_28%)]" />
+      <div className="relative mx-auto grid max-w-6xl gap-9 lg:grid-cols-[.82fr_1.18fr] lg:items-center">
+        <motion.div
+          variants={imageReveal}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          className="relative mx-auto w-full max-w-sm lg:max-w-md"
+        >
+          <OptionalImage
+            src={story.media.portrait}
+            alt="Lovia portrait"
+            className="cinematic-frame aspect-[4/5] w-full border border-gold/30"
+            imageClassName="object-cover"
+          />
+          <div className="absolute -bottom-5 left-5 max-w-[15rem] bg-ivory px-5 py-4 text-espresso shadow-xl">
+            <p className="font-serif text-xl italic leading-6">
+              The small truths I keep noticing.
+            </p>
+          </div>
+        </motion.div>
+        <motion.div
+          variants={sequenceContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+        >
+          <motion.p variants={textReveal} className="eyebrow text-gold">
+            Why you
+          </motion.p>
+          <motion.h2
+            variants={textReveal}
+            className="mt-4 font-serif text-[clamp(2.35rem,6vw,5rem)] leading-none tracking-[-.025em]"
+          >
+            {story.whyYou.heading}
+          </motion.h2>
+          <motion.p
+            variants={textReveal}
+            className="story-copy mt-6 max-w-xl text-base leading-8 text-ivory/68 sm:text-lg"
+          >
+            {story.whyYou.supporting}
+          </motion.p>
+          <dl className="mt-8 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+            {story.whyYou.qualities.map((q) => (
+              <motion.div
+                key={q.title}
+                variants={textReveal}
+                className="border-t border-gold/25 pt-4"
+              >
+                <dt className="font-serif text-2xl text-ivory sm:text-3xl">
+                  {q.title}
+                </dt>
+                <dd className="mt-2 text-sm leading-7 text-ivory/65 sm:text-base">
+                  {q.text}
+                </dd>
+              </motion.div>
+            ))}
+          </dl>
+        </motion.div>
+      </div>
+      <motion.p
+        variants={textReveal}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        className="relative mx-auto mt-16 max-w-3xl text-center font-serif text-[clamp(2rem,4.7vw,3.8rem)] leading-tight text-gold"
+      >
+        {story.whyYou.finalLine}
+      </motion.p>
+    </section>
+  );
+}

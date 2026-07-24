@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import { useState } from 'react';
-import { story } from '@/data/story';
-import { textReveal, sequenceContainer, viewportOnce } from './motion';
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { useState } from "react";
+import { story } from "@/data/story";
+import { textReveal, sequenceContainer, viewportOnce } from "./motion";
 
 type ProposalSectionProps = {
   onYes: () => void;
@@ -14,7 +14,12 @@ export function ProposalSection({ onYes }: ProposalSectionProps) {
   const [attempts, setAttempts] = useState(0);
   const [bg, setBg] = useState(true);
   const [off, setOff] = useState({ x: 0, y: 0 });
-  const response = attempts > 0 ? story.proposal.softResponses[(attempts - 1) % story.proposal.softResponses.length] : '';
+  const response =
+    attempts > 0
+      ? story.proposal.softResponses[
+          (attempts - 1) % story.proposal.softResponses.length
+        ]
+      : "";
 
   function moveNo() {
     const next = attempts + 1;
@@ -23,36 +28,73 @@ export function ProposalSection({ onYes }: ProposalSectionProps) {
       setOff({ x: 0, y: 0 });
       return;
     }
-    setOff([
-      { x: 24, y: -10 },
-      { x: -22, y: 12 },
-      { x: 16, y: 16 },
-    ][next - 1]);
+    setOff(
+      [
+        { x: 24, y: -10 },
+        { x: -22, y: 12 },
+        { x: 16, y: 16 },
+      ][next - 1],
+    );
   }
 
   return (
-    <section id="proposal" data-navigation-theme="dark" className="relative grid min-h-dvh place-items-center overflow-hidden bg-espresso px-6 py-20 text-center text-ivory sm:py-24">
-      {bg ? <Image src={story.media.portrait} alt="" fill sizes="100vw" className="object-cover opacity-45" onError={() => setBg(false)} /> : null}
+    <section
+      id="proposal"
+      data-navigation-theme="dark"
+      className="relative grid min-h-dvh place-items-center overflow-hidden bg-espresso safe-px min-h-[100svh] py-14 text-center text-ivory sm:py-20 lg:py-24"
+    >
+      {bg ? (
+        <Image
+          src={story.media.portrait}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-45"
+          onError={() => setBg(false)}
+        />
+      ) : null}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_65%_30%,rgba(169,137,82,.18),transparent_28%),linear-gradient(rgba(27,18,14,.58),rgba(27,18,14,.88))]" />
       <div className="absolute inset-0 shadow-[inset_0_0_220px_rgba(0,0,0,.85)]" />
-      <motion.div variants={sequenceContainer} initial="hidden" whileInView="visible" viewport={viewportOnce} className="relative max-w-3xl">
-        <motion.p variants={textReveal} className="eyebrow text-gold">{story.proposal.eyebrow}</motion.p>
+      <motion.div
+        variants={sequenceContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        className="relative w-full max-w-3xl"
+      >
+        <motion.p variants={textReveal} className="eyebrow text-gold">
+          {story.proposal.eyebrow}
+        </motion.p>
         <div className="mt-6 space-y-3 sm:mt-7 sm:space-y-4">
           {story.proposal.lines.map((line, i) => (
             <motion.p
               key={line}
               variants={textReveal}
-              className={`${i === 0 ? 'font-serif text-[clamp(2.45rem,7.5vw,5.6rem)]' : 'mx-auto max-w-2xl font-serif text-[clamp(1.55rem,4vw,3.15rem)]'} leading-[1.04]`}
+              className={`${i === 0 ? "font-serif text-[clamp(2.45rem,7.5vw,5.6rem)]" : "mx-auto max-w-2xl font-serif text-[clamp(1.55rem,4vw,3.15rem)]"} leading-[1.04]`}
             >
               {line}
             </motion.p>
           ))}
         </div>
-        <motion.div variants={textReveal} className="relative mx-auto mt-10 flex min-h-24 max-w-sm items-center justify-center gap-4 overflow-visible px-6">
-          <button type="button" onClick={onYes} className="btn-primary rounded-none shadow-[0_18px_45px_rgba(0,0,0,.18)]">
+        <motion.div
+          variants={textReveal}
+          className="relative mx-auto mt-8 flex min-h-20 w-full max-w-sm items-center justify-center gap-3 overflow-visible px-0 sm:mt-10 sm:gap-4"
+        >
+          <button
+            type="button"
+            onClick={onYes}
+            className="btn-primary rounded-none shadow-[0_18px_45px_rgba(0,0,0,.18)]"
+          >
             Yes, May
           </button>
-          <motion.button type="button" animate={off} transition={{ type: 'spring', stiffness: 360, damping: 26 }} onMouseEnter={moveNo} onClick={moveNo} className="btn-secondary rounded-none">
+          <motion.button
+            type="button"
+            animate={off}
+            transition={{ type: "spring", stiffness: 360, damping: 26 }}
+            onMouseEnter={moveNo}
+            onClick={moveNo}
+            className="btn-secondary rounded-none"
+          >
             Not yet
           </motion.button>
         </motion.div>

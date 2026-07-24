@@ -1,33 +1,75 @@
-import type { Variants, Transition } from 'framer-motion';
+import type { Transition, Variants } from 'framer-motion';
+
+export const motionEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export const viewportOnce = { once: true, amount: 0.35 } as const;
+export const viewportText = { once: true, amount: 0.7 } as const;
 
-export const baseTransition: Transition = {
+export const textTransition: Transition = {
+  duration: 0.6,
+  ease: motionEase,
+};
+
+export const imageTransition: Transition = {
+  duration: 0.75,
+  ease: motionEase,
+};
+
+export const sceneTransition: Transition = {
+  duration: 0.9,
+  ease: motionEase,
+};
+
+export const overlayTransition: Transition = {
   duration: 0.45,
-  ease: [0.22, 1, 0.36, 1],
+  ease: motionEase,
 };
 
-export const revealUp: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: { opacity: 1, y: 0, transition: baseTransition },
+export const buttonTransition: Transition = {
+  duration: 0.25,
+  ease: motionEase,
 };
 
-export const revealLeft: Variants = {
-  hidden: { opacity: 0, x: -16 },
-  visible: { opacity: 1, x: 0, transition: baseTransition },
+export const reducedFadeTransition: Transition = {
+  duration: 0.3,
+  ease: motionEase,
 };
 
-export const revealRight: Variants = {
-  hidden: { opacity: 0, x: 16 },
-  visible: { opacity: 1, x: 0, transition: baseTransition },
+export const textReveal: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: textTransition },
 };
 
-export const staggerContainer: Variants = {
+export const sceneReveal: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: sceneTransition },
+};
+
+export const imageReveal: Variants = {
+  hidden: { opacity: 0, scale: 1.02 },
+  visible: { opacity: 1, scale: 1, transition: imageTransition },
+};
+
+export const overlayFade: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: overlayTransition },
+  exit: { opacity: 0, transition: overlayTransition },
+};
+
+export const sequenceContainer: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.08,
       delayChildren: 0.08,
+      staggerChildren: 0.08,
     },
   },
 };
+
+export const reducedTextReveal: Variants = {
+  hidden: { opacity: 0, y: 0 },
+  visible: { opacity: 1, y: 0, transition: reducedFadeTransition },
+};
+
+export const reducedSceneReveal: Variants = reducedTextReveal;
+export const reducedImageReveal: Variants = reducedTextReveal;

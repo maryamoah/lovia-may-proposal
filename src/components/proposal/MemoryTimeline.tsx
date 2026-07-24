@@ -1,20 +1,10 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { story, type Memory } from '@/data/story';
 import { baseTransition } from './motion';
 import { OptionalImage } from './OptionalImage';
-
-function GentleImagePlaceholder({ title }: { title: string }) {
-  return (
-    <div className="grid h-full min-h-[18rem] w-full place-items-center bg-[radial-gradient(circle_at_30%_20%,rgba(169,137,82,.24),transparent_32%),linear-gradient(135deg,rgba(239,227,207,.92),rgba(111,36,32,.12))] px-8 text-center text-espresso">
-      <div>
-        <p className="font-serif text-3xl italic leading-tight">{title}</p>
-        <p className="mt-4 text-xs uppercase tracking-[.24em] text-gold">Photo coming soon</p>
-      </div>
-    </div>
-  );
-}
 
 function SplitCaption({ memory, light = false }: { memory: Memory; light?: boolean }) {
   return (
@@ -40,7 +30,7 @@ export function MemoryTimeline() {
       <section data-navigation-theme="dark" className="relative overflow-hidden bg-espresso text-ivory">
         <div className="mx-auto grid w-full max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:px-12 lg:py-24">
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }} className="relative min-h-[22rem] overflow-hidden rounded-sm sm:min-h-[30rem] lg:min-h-[34rem]">
-            <OptionalImage src={story.media.feltAtHome} alt={firstMeeting.title} className="absolute inset-0" sizes="(min-width: 1024px) 52vw, 100vw" fallback={<GentleImagePlaceholder title={firstMeeting.title} />} />
+            <Image src={story.media.feltAtHomeTogether} alt="May and Lovia feeling at home together" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-contain" />
             <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(27,18,14,.18),rgba(27,18,14,.72)),linear-gradient(0deg,rgba(27,18,14,.75),transparent_45%)]" />
           </motion.div>
           <div className="relative">
@@ -56,7 +46,9 @@ export function MemoryTimeline() {
       <section className="relative overflow-hidden bg-ivory px-5 py-16 text-espresso sm:px-8 lg:px-12 lg:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[.92fr_1.08fr] lg:items-center">
           <motion.div initial={{ opacity: 0, x: -24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.35 }} transition={baseTransition} className="overflow-hidden rounded-sm border border-gold/25 bg-cream shadow-[0_24px_70px_rgba(27,18,14,.08)]">
-            <OptionalImage src={story.media.walkSideBySide} alt={quietOrdinary.title} className="aspect-[4/3] w-full" sizes="(min-width: 1024px) 48vw, 100vw" fallback={<GentleImagePlaceholder title={quietOrdinary.title} />} />
+            <div className="relative aspect-[4/3] w-full">
+              <Image src={story.media.walkSideBySide} alt="May and Lovia sharing a quiet moment together" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-contain" />
+            </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.45 }} transition={baseTransition}>
             <p className="eyebrow text-gold">{quietOrdinary.eyebrow}</p>
@@ -74,7 +66,9 @@ export function MemoryTimeline() {
             <SplitCaption memory={holdingHands} />
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, amount: 0.35 }} transition={baseTransition} className="order-1 overflow-hidden rounded-sm border border-gold/25 bg-ivory/5 shadow-[0_24px_70px_rgba(0,0,0,.18)] lg:order-2">
-            <OptionalImage src={story.media.promiseToHoldYourHand} alt={holdingHands.title} className="aspect-[4/3] w-full" sizes="(min-width: 1024px) 48vw, 100vw" fallback={<GentleImagePlaceholder title={holdingHands.title} />} />
+            <div className="relative aspect-[4/3] w-full">
+              <Image src={story.media.holdingHands} alt="May and Lovia holding hands through life" fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-contain" />
+            </div>
           </motion.div>
         </div>
       </section>

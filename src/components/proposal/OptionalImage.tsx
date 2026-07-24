@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import type { ReactNode } from 'react';
-import { useState } from 'react';
+import Image from "next/image";
+import type { ReactNode } from "react";
+import { useState } from "react";
 
 type OptionalImageProps = {
   src?: string;
@@ -18,10 +18,10 @@ type OptionalImageProps = {
 export function OptionalImage({
   src,
   alt,
-  className = '',
-  imageClassName = 'object-cover',
+  className = "",
+  imageClassName = "object-cover",
   priority = false,
-  sizes = '(min-width: 768px) 420px, 90vw',
+  sizes = "(min-width: 768px) 420px, 90vw",
   fallback = null,
   onAvailableChange,
 }: OptionalImageProps) {

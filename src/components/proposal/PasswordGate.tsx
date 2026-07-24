@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { FormEvent, useState } from 'react';
 import { story } from '@/data/story';
+import { overlayFade, sceneReveal, textReveal } from './motion';
 
 type PasswordGateProps = {
   onUnlock?: () => void;
@@ -30,7 +31,7 @@ export function PasswordGate({ onUnlock, onOpen, unlocked = false }: PasswordGat
       <div className="absolute inset-x-8 top-8 h-px bg-gradient-to-r from-transparent via-gold/35 to-transparent" />
       <AnimatePresence mode="wait">
         {!unlocked ? (
-          <motion.form key="password" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -18 }} onSubmit={submit} className="relative w-full max-w-sm text-center">
+          <motion.form key="password" variants={sceneReveal} initial="hidden" animate="visible" exit="hidden" onSubmit={submit} className="relative w-full max-w-sm text-center">
             <div className="wax-seal mx-auto mb-8 grid h-16 w-16 place-items-center rounded-full bg-rose text-center font-serif text-2xl text-ivory">M</div>
             <p className="eyebrow text-gold">For Lovia only.</p>
             <h1 className="mt-4 font-serif text-balance text-[clamp(2.35rem,10vw,4.5rem)] leading-[.95] tracking-[-.035em]">Enter our date, Mommie.</h1>
@@ -40,8 +41,8 @@ export function PasswordGate({ onUnlock, onOpen, unlocked = false }: PasswordGat
             <button className="btn-primary mt-5 w-full">Unlock our story</button>
           </motion.form>
         ) : (
-          <motion.div key="seal" initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }} className="relative max-w-sm text-center">
-            <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mb-8 font-serif text-3xl italic text-ivory/82">You remembered.</motion.p>
+          <motion.div key="seal" variants={overlayFade} initial="hidden" animate="visible" exit="exit" className="relative max-w-sm text-center">
+            <motion.p variants={textReveal} initial="hidden" animate="visible" className="mb-8 font-serif text-3xl italic text-ivory/82">You remembered.</motion.p>
             <button onClick={onOpen} aria-label="Press the wax seal to begin our story" className="wax-seal mx-auto grid h-28 w-28 place-items-center rounded-full bg-rose font-serif text-5xl text-ivory transition hover:scale-[1.03]">M</button>
             <p className="mt-8 font-serif text-2xl text-ivory/86">Everything after this belongs to us.</p>
             <p className="mt-3 text-sm uppercase tracking-[.24em] text-gold/80">Press the seal</p>

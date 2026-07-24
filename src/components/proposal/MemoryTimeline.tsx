@@ -1,7 +1,6 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useRef } from 'react';
+import { motion } from 'framer-motion';
 import { story } from '@/data/story';
 import { MemoryFilm } from './MemoryFilm';
 import { baseTransition } from './motion';
@@ -11,20 +10,15 @@ export function MemoryTimeline() {
   const firstMeeting = story.memories[1];
   const capeCoast = story.memories[2];
   const attieke = story.memories[3];
-  const stickyRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({ target: stickyRef, offset: ['start end', 'end start'] });
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1.08, 1]);
-  const imageY = useTransform(scrollYProgress, [0, 1], [-24, 24]);
-
   return (
     <section id="memories" className="text-espresso">
-      <section ref={stickyRef} data-navigation-theme="dark" className="relative min-h-[145dvh] bg-espresso text-ivory">
-        <div className="sticky top-0 grid min-h-dvh overflow-hidden lg:grid-cols-[1.15fr_.85fr]">
-          <motion.div style={{ scale: imageScale, y: imageY }} className="relative min-h-[55dvh] lg:min-h-dvh">
-            <OptionalImage src={story.media.feltAtHome} alt={firstMeeting.title} className="absolute inset-0" sizes="(min-width: 1024px) 58vw, 100vw" />
+      <section data-navigation-theme="dark" className="relative overflow-hidden bg-espresso text-ivory">
+        <div className="mx-auto grid w-full max-w-7xl gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:px-12 lg:py-24">
+          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }} className="relative min-h-[22rem] overflow-hidden rounded-sm sm:min-h-[30rem] lg:min-h-[34rem]">
+            <OptionalImage src={story.media.feltAtHome} alt={firstMeeting.title} className="absolute inset-0" sizes="(min-width: 1024px) 52vw, 100vw" />
             <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(27,18,14,.18),rgba(27,18,14,.72)),linear-gradient(0deg,rgba(27,18,14,.75),transparent_45%)]" />
           </motion.div>
-          <div className="relative grid place-items-center px-6 py-16 lg:min-h-dvh lg:px-12">
+          <div className="relative">
             <div className="max-w-xl">
               <p className="eyebrow text-gold">{firstMeeting.eyebrow}</p>
               <h2 className="mt-5 font-serif text-[clamp(2.4rem,7vw,5.8rem)] leading-[.95] tracking-[-.035em]">{firstMeeting.title}</h2>

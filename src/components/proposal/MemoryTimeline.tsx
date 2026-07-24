@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { story } from '@/data/story';
-import { MemoryFilm } from './MemoryFilm';
 import { baseTransition } from './motion';
 import { OptionalImage } from './OptionalImage';
 
@@ -34,20 +33,23 @@ export function MemoryTimeline() {
         </div>
       </section>
 
-      <section data-navigation-theme="light" className="bg-ivory px-5 py-16 sm:px-10 lg:py-24">
-        <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[.78fr_1.22fr] lg:items-end">
-          <div>
-            <p className="eyebrow text-gold">A funny little chapter</p>
-            <h2 className="mt-4 font-serif text-[clamp(2.2rem,5.4vw,4.8rem)] leading-[1.02] tracking-[-.035em]">Côte d’Ivoire, zero French, and one mission.</h2>
-          </div>
-          <motion.div initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.35 }} className="relative border-y border-gold/35 py-8">
-            <div className="overflow-hidden rounded-sm border border-gold/30 bg-cream shadow-[0_22px_60px_rgba(27,18,14,.08)]">
-              <OptionalImage src={story.media.attiekeFunnyMoment} alt={attieke.title} className="aspect-[4/3] w-full" sizes="(min-width: 1024px) 55vw, 100vw" />
+      <section className="relative overflow-hidden bg-[var(--ivory)] text-[var(--espresso)]">
+        <div className="mx-auto w-full max-w-7xl px-5 py-16 sm:px-8 lg:px-12 lg:py-24">
+          <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+            <div className="min-w-0">
+              <p className="eyebrow text-gold">A funny little chapter</p>
+              <h2 className="mt-4 font-serif text-[clamp(2.2rem,5.4vw,4.8rem)] leading-[1.02] tracking-[-.035em]">Côte d’Ivoire, zero French, and one mission.</h2>
+              <p className="eyebrow mt-7 text-gold">{attieke.eyebrow}</p>
+              <h3 className="mt-3 font-serif text-[clamp(1.9rem,4vw,3.35rem)] leading-tight">{attieke.title}</h3>
+              <p className="story-copy mt-5 max-w-2xl text-lg leading-8 text-espresso/68">{attieke.caption}</p>
             </div>
-            <p className="eyebrow mt-7 text-gold">{attieke.eyebrow}</p>
-            <h3 className="mt-3 font-serif text-[clamp(1.9rem,4vw,3.35rem)] leading-tight">{attieke.title}</h3>
-            <p className="story-copy mt-5 max-w-2xl text-lg leading-8 text-espresso/68">{attieke.caption}</p>
-          </motion.div>
+
+            <div className="min-w-0">
+              <div className="overflow-hidden rounded-sm border border-gold/30 bg-cream shadow-[0_22px_60px_rgba(27,18,14,.08)]">
+                <OptionalImage src={story.media.attiekeFunnyMoment} alt={attieke.title} className="aspect-[4/3] w-full" sizes="(min-width: 1024px) 55vw, 100vw" />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -69,27 +71,6 @@ export function MemoryTimeline() {
         </div>
       </section>
 
-      <section data-navigation-theme="light" className="bg-ivory px-5 py-16 sm:px-10 lg:py-24">
-        <div className="mx-auto max-w-6xl">
-          <div className="mb-10 border-t border-gold/30 pt-9 md:flex md:items-end md:justify-between md:gap-8">
-            <div>
-              <p className="eyebrow text-gold">Selected memories</p>
-              <h2 className="mt-4 max-w-3xl font-serif text-[clamp(2.15rem,5.5vw,4.5rem)] leading-[1.02] tracking-[-.025em]">Only the moments we needed.</h2>
-            </div>
-            <p className="story-copy mt-5 max-w-sm text-sm leading-7 text-espresso/58 md:text-right">A concise rhythm of dates, journeys, ordinary plans, and the quiet certainty that this was becoming home.</p>
-          </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            {story.memories.slice(0, 1).map((memory) => (
-              <motion.article key={memory.title} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.3 }} className="border border-gold/25 bg-cream/55 p-6 shadow-[0_18px_50px_rgba(27,18,14,.06)]">
-                <p className="eyebrow text-gold">{memory.eyebrow}</p>
-                <h3 className="mt-3 font-serif text-[clamp(1.85rem,3.6vw,3rem)] leading-tight">{memory.title}</h3>
-                <p className="story-copy mt-4 max-w-md leading-7 text-espresso/68">{memory.caption}</p>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-        <MemoryFilm />
-      </section>
     </section>
   );
 }

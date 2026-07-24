@@ -24,6 +24,7 @@ export const story = {
     capeCoast: '/images/cape-coast.jpg',
     feltAtHome: '/images/felt-at-home.jpg',
     portrait: '/images/lovia-portrait.jpg',
+    celebration: '/images/celebration.jpg',
     celebrationVideo: '/video/our-memory.mp4',
     music: '/audio/sweet-lady.mp3',
   },

@@ -13,16 +13,16 @@ export function WhyYouSection() {
     <section
       id="why-you"
       data-navigation-theme="dark"
-      className="relative overflow-hidden bg-espresso safe-px py-16 text-ivory sm:px-10 lg:py-24"
+      className="section-space relative overflow-hidden bg-espresso safe-px text-ivory"
     >
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_28%,rgba(169,137,82,.16),transparent_28%)]" />
-      <div className="relative mx-auto grid max-w-6xl gap-9 lg:grid-cols-[.82fr_1.18fr] lg:items-center">
+      <div className="relative mx-auto grid max-w-6xl gap-9 md:grid-cols-[.82fr_1.18fr] md:items-center">
         <motion.div
           variants={imageReveal}
           initial="hidden"
           whileInView="visible"
           viewport={viewportOnce}
-          className="relative mx-auto w-full max-w-sm lg:max-w-md"
+          className="relative mx-auto w-full max-w-sm md:max-w-md"
         >
           <OptionalImage
             src={story.media.portrait}
@@ -80,7 +80,7 @@ export function WhyYouSection() {
         initial="hidden"
         whileInView="visible"
         viewport={viewportOnce}
-        className="relative mx-auto mt-16 max-w-3xl text-center font-serif text-[clamp(2rem,4.7vw,3.8rem)] leading-tight text-gold"
+          className="relative mx-auto mt-[clamp(3rem,6vw,4rem)] max-w-3xl text-center font-serif text-[clamp(2rem,4.7vw,3.8rem)] leading-tight text-gold"
       >
         {story.whyYou.finalLine}
       </motion.p>

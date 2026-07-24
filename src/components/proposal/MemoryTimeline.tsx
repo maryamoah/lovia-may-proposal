@@ -52,13 +52,13 @@ export function MemoryTimeline() {
         data-navigation-theme="dark"
         className="relative overflow-hidden bg-espresso text-ivory"
       >
-        <div className="mx-auto grid w-full max-w-7xl gap-8 lg:gap-10 safe-px py-14 sm:px-8 lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:px-12 lg:py-24">
+        <div className="section-space mx-auto grid w-full max-w-7xl gap-8 safe-px md:grid-cols-[1.05fr_.95fr] md:items-center lg:gap-10">
           <motion.div
             variants={imageReveal}
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
-            className="relative aspect-[4/5] overflow-hidden rounded-sm border border-gold/20 bg-ivory/5 shadow-[0_24px_70px_rgba(0,0,0,.16)] sm:aspect-[3/2] lg:aspect-[4/5]"
+            className="relative aspect-[4/5] overflow-hidden rounded-sm border border-gold/20 bg-ivory/5 shadow-[0_24px_70px_rgba(0,0,0,.16)] sm:aspect-[3/2] md:aspect-[4/5]"
           >
             <Image
               src={story.media.feltAtHomeTogether}
@@ -80,8 +80,8 @@ export function MemoryTimeline() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-ivory safe-px py-14 text-espresso sm:px-8 lg:px-12 lg:py-24">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:gap-10 lg:grid-cols-[.92fr_1.08fr] lg:items-center">
+      <section className="section-space relative overflow-hidden bg-ivory safe-px text-espresso">
+        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[.92fr_1.08fr] md:items-center lg:gap-10">
           <motion.div
             variants={imageReveal}
             initial="hidden"
@@ -115,8 +115,8 @@ export function MemoryTimeline() {
       </section>
 
       <section className="relative overflow-hidden bg-[var(--ivory)] text-[var(--espresso)]">
-        <div className="mx-auto w-full max-w-7xl safe-px py-14 sm:px-8 lg:px-12 lg:py-24">
-          <div className="grid items-center gap-8 lg:gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+        <div className="section-space mx-auto w-full max-w-7xl safe-px">
+          <div className="grid items-center gap-8 md:grid-cols-[0.9fr_1.1fr] lg:gap-16">
             <motion.div
               variants={sceneReveal}
               initial="hidden"
@@ -160,15 +160,15 @@ export function MemoryTimeline() {
 
       <section
         data-navigation-theme="dark"
-        className="relative overflow-hidden bg-espresso safe-px py-14 text-ivory sm:px-8 lg:px-12 lg:py-24"
+        className="section-space relative overflow-hidden bg-espresso safe-px text-ivory"
       >
-        <div className="mx-auto grid max-w-7xl gap-8 lg:gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
+        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-2 md:items-center lg:gap-10">
           <motion.div
             variants={sceneReveal}
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
-            className="order-2 lg:order-1"
+            className="order-2 md:order-1"
           >
             <p className="eyebrow text-gold">{holdingHands.eyebrow}</p>
             <h2 className="mt-5 font-serif text-[clamp(2.25rem,5.8vw,5rem)] leading-[1] tracking-[-.035em]">
@@ -181,7 +181,7 @@ export function MemoryTimeline() {
             initial="hidden"
             whileInView="visible"
             viewport={viewportOnce}
-            className="order-1 overflow-hidden rounded-sm border border-gold/25 bg-ivory/5 shadow-[0_24px_70px_rgba(0,0,0,.18)] lg:order-2"
+            className="order-1 overflow-hidden rounded-sm border border-gold/25 bg-ivory/5 shadow-[0_24px_70px_rgba(0,0,0,.18)] md:order-2"
           >
             <div className="relative aspect-[4/3] w-full">
               <Image

@@ -89,7 +89,7 @@ export const MusicControl = forwardRef<MusicControlHandle, MusicControlProps>(
     }, [start, muted, play]);
 
     return (
-      <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(.75rem,env(safe-area-inset-right))] z-50 rounded-full border border-gold/35 bg-ivory/90 min-h-11 px-3 py-2 text-[.62rem] uppercase tracking-[.16em] text-espresso shadow-[0_18px_45px_rgba(0,0,0,.18)] backdrop-blur sm:right-4">
+      <div className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-[max(.75rem,env(safe-area-inset-right))] z-50 flex min-h-11 max-w-[calc(100vw-1.5rem)] items-center rounded-full border border-gold/35 bg-ivory/90 px-3 py-2 text-[.62rem] uppercase tracking-[.16em] text-espresso shadow-[0_18px_45px_rgba(0,0,0,.18)] backdrop-blur sm:right-4">
         <audio
           ref={audio}
           src={story.media.music}
@@ -106,7 +106,7 @@ export const MusicControl = forwardRef<MusicControlHandle, MusicControlProps>(
               : "Sweet Lady music is unavailable"
           }
           disabled={!available}
-          className="flex items-center gap-2 disabled:cursor-default disabled:opacity-65"
+          className="flex min-h-11 items-center gap-2 disabled:cursor-default disabled:opacity-65"
         >
           <span
             aria-hidden="true"

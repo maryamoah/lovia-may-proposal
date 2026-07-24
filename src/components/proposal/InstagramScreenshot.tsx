@@ -89,7 +89,7 @@ export function InstagramScreenshot({ src }: InstagramScreenshotProps) {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 z-[80] grid place-items-center bg-espresso/95 p-4 backdrop-blur"
+            className="fixed inset-0 z-[80] grid place-items-center overflow-auto bg-espresso/95 px-[max(1rem,env(safe-area-inset-left))] py-[max(4.5rem,env(safe-area-inset-top))] pb-[max(1rem,env(safe-area-inset-bottom))] backdrop-blur"
             onClick={() => setExpanded(false)}
           >
             <h2 id="instagram-lightbox-title" className="sr-only">
@@ -99,7 +99,7 @@ export function InstagramScreenshot({ src }: InstagramScreenshotProps) {
               ref={closeButtonRef}
               type="button"
               onClick={() => setExpanded(false)}
-              className="absolute right-4 top-4 rounded-full border border-gold/50 px-4 py-2 text-sm text-gold transition hover:bg-gold hover:text-espresso"
+              className="absolute right-[max(1rem,env(safe-area-inset-right))] top-[max(1rem,env(safe-area-inset-top))] min-h-11 rounded-full border border-gold/50 px-4 py-2 text-sm text-gold transition hover:bg-gold hover:text-espresso"
               aria-label="Close Instagram screenshot lightbox"
             >
               Close
@@ -111,7 +111,7 @@ export function InstagramScreenshot({ src }: InstagramScreenshotProps) {
               <OptionalImage
                 src={src}
                 alt="Expanded first Instagram conversation"
-                className="h-[86dvh] w-full"
+                className="h-[min(82dvh,60rem)] w-full"
                 imageClassName="object-contain"
                 fallback={
                   <div className="mx-auto w-full max-w-sm">

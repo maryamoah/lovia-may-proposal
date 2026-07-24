@@ -30,7 +30,7 @@ export function PasswordGate({
   }
 
   return (
-    <div className="grid min-h-dvh place-items-center overflow-hidden bg-espresso safe-px py-10 safe-pt safe-pb text-ivory grain">
+    <div className="viewport-scene grid min-h-[100svh] place-items-center overflow-hidden bg-espresso safe-px py-[clamp(1.5rem,6vh,2.5rem)] safe-pt safe-pb text-ivory grain">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(169,137,82,.14),transparent_34%)]" />
       <div className="absolute inset-x-8 top-8 h-px bg-gradient-to-r from-transparent via-gold/35 to-transparent" />
       <AnimatePresence mode="wait">
@@ -44,7 +44,7 @@ export function PasswordGate({
             onSubmit={submit}
             className="relative w-full max-w-sm text-center"
           >
-            <div className="wax-seal mx-auto mb-8 grid h-16 w-16 place-items-center rounded-full bg-rose text-center font-serif text-2xl text-ivory">
+            <div className="wax-seal mx-auto mb-[clamp(1.25rem,4vh,2rem)] grid h-[clamp(3.5rem,9vh,4rem)] w-[clamp(3.5rem,9vh,4rem)] place-items-center rounded-full bg-rose text-center font-serif text-2xl text-ivory">
               M
             </div>
             <p className="eyebrow text-gold">For Lovia only.</p>
@@ -52,7 +52,7 @@ export function PasswordGate({
               Enter our date, Mommie.
             </h1>
             <label
-              className="mt-8 block text-sm text-ivory/62"
+              className="mt-[clamp(1.5rem,4vh,2rem)] block text-sm text-ivory/62"
               htmlFor="proposal-password"
             >
               The day we finally met

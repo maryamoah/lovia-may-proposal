@@ -35,7 +35,7 @@ export function OpeningScene({
   return (
     <section
       id={standalone ? undefined : "opening"}
-      className="relative grid min-h-dvh place-items-center overflow-hidden bg-espresso safe-px min-h-[100svh] py-10 text-center text-ivory sm:px-6 sm:py-16 lg:py-24"
+      className="viewport-scene relative grid min-h-[100svh] place-items-center overflow-hidden bg-espresso safe-px py-[clamp(1.75rem,7vh,6rem)] text-center text-ivory"
     >
       <motion.div
         style={{ y, scale }}
@@ -55,7 +55,7 @@ export function OpeningScene({
           initial="hidden"
           animate="visible"
           transition={{ ...textTransition, delay: 0.08 }}
-          className="mx-auto my-5 h-12 w-12 sm:my-7 sm:h-14 sm:w-14 rounded-full border border-gold/35 before:mx-auto before:mt-4 before:block before:h-6 before:w-8 before:rotate-[-20deg] before:rounded-[50%] before:border before:border-gold/60 sm:my-9 sm:h-16 sm:w-16"
+          className="scene-ornament mx-auto my-[clamp(1rem,3vh,2.25rem)] h-[clamp(3rem,7vh,4rem)] w-[clamp(3rem,7vh,4rem)] rounded-full border border-gold/35 before:mx-auto before:mt-[25%] before:block before:h-1/2 before:w-2/3 before:rotate-[-20deg] before:rounded-[50%] before:border before:border-gold/60"
         />
         <div className="space-y-5">
           {openingLines.map((line, index) => (
@@ -67,7 +67,7 @@ export function OpeningScene({
               transition={{ ...textTransition, delay: 0.16 + index * 0.12 }}
               className={
                 index === 0
-                  ? "font-serif text-[clamp(2.75rem,10vw,7.25rem)] leading-[.92] tracking-[-.04em]"
+                  ? "font-serif text-[clamp(2.55rem,10vw,7.25rem)] leading-[.92] tracking-[-.04em]"
                   : "story-copy mx-auto max-w-2xl text-[clamp(1.05rem,2.4vw,1.55rem)] leading-7 text-ivory/76 sm:leading-8"
               }
             >
@@ -80,7 +80,7 @@ export function OpeningScene({
           initial="hidden"
           animate="visible"
           transition={{ ...textTransition, delay: 0.4 }}
-          className="mt-6 text-xs uppercase tracking-[.24em] text-gold/75"
+          className="mt-[clamp(1rem,3vh,1.5rem)] text-xs uppercase tracking-[.24em] text-gold/75"
         >
           {story.opening.date}
         </motion.p>
@@ -91,7 +91,7 @@ export function OpeningScene({
             animate="visible"
             transition={{ ...textTransition, delay: 0.48 }}
             onClick={onComplete}
-            className="btn-primary mt-8 sm:mt-10"
+            className="btn-primary mt-[clamp(1.25rem,4vh,2.5rem)]"
           >
             Begin our story
           </motion.button>
